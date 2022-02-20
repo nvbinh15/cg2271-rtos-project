@@ -94,12 +94,11 @@ function updateIpAddress() {
 }
 
 function onRed() {
-    var data = fetch('http://' + ipAddress + '/onRed')
-    console.log(data);
+    fetch('http://' + ipAddress + '/onRed')
 }
 
 function offRed() {
-    fetch('http://' + ipAddress + 'offRed')
+    fetch('http://' + ipAddress + '/offRed')
 }
 
 function onGreen() {
