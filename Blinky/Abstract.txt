@@ -1,0 +1,36 @@
+The 'Blinky' project is a simple CMSIS RTOS based example for
+NXP 'MKL25' series microcontroller using NXP 'FRDM-KL25Z' board.
+Compliant to Cortex Microcontroller Software Interface Standard (CMSIS).
+
+Example functionality:
+ - Clock Settings:
+   - XTAL       =  IRC (Slow Internal Reference Clock)
+   - Core Clock =  20.9 MHz
+
+ - 3 LEDs are blinking with a fixed speed.
+
+
+The Blinky program is available in different targets:
+
+  ULink2:                          Debug/Target Driver is configured as ULink2
+                                   runs from Internal Flash located on chip
+
+  ULink2 MTB:                      Debug/Target Driver is configured as ULINK2
+                                   shows use of MTB(Micro Trace Buffer)
+
+
+Selecting "CMSIS-DAP" OpenSDA application:
+ 1. Start OpenSDA in bootloader mode: Unplug and plug the OpenSDA USB connection whilst pushbutton, SW1 is pressed.
+ 2. Drag and drop "CMSIS-DAP" OpenSDA application file to the OpenSDA mass storage device.
+ 3. Unplug and plug the OpenSDA USB connection.
+
+Note:
+ - "CMSIS-DAP" OpenSDA application file is located in folder "OpenSDA".
+ - For more information on OpenSDA, refer to FRDM-KL25Z user manual.
+
+MTB(Micro Trace Buffer) Notes
+-------------------------------
+- DBG_MTB.ini file configures MTB settings, which allows to configure MTB RAM buffer size, buffer position, and flow control.
+- MTB allocates user-defined region of the system RAM for storing instruction address change-of-flow data packets.
+  Modify MTB position and size to define the used memory region. The position must be a multiple of the buffer size.
+  The allocated buffer region cannot be used as application RAM.

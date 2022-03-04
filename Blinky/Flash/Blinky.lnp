@@ -1,0 +1,11 @@
+--cpu Cortex-M0+
+".\flash\blinky.o"
+".\flash\led_frdm-kl25z.o"
+"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib"
+".\flash\rtx_conf_cm.o"
+".\flash\startup_mkl25z4.o"
+".\flash\system_mkl25z4.o"
+--library_type=microlib --strict --scatter ".\Flash\Blinky.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Flash\Blinky.map" -o .\Flash\Blinky.axf

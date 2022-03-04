@@ -1,0 +1,10 @@
+;#<FEEDBACK># ARM Linker, 5060750: Last Updated: Fri Mar 04 15:07:12 2022
+;VERSION 0.2
+;FILE startup_mkl25z4.o
+;FILE system_mkl25z4.o
+__asm___16_system_MKL25Z4_c_5d646a67____REV16 <= USED 0
+__asm___16_system_MKL25Z4_c_5d646a67____REVSH <= USED 0
+;FILE uart.o
+UART2_Transmit_Poll <= USED 0
+__asm___6_uart_c_f7569bd4____REV16 <= USED 0
+__asm___6_uart_c_f7569bd4____REVSH <= USED 0
