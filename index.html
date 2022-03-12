@@ -11,8 +11,8 @@
         .button {
             align-items: center;
             display: inline-block;
-            padding: 2rem;
-            margin: .5rem 5rem .5rem 5rem;
+            padding: 3%;
+            margin: .5rem 2% .5rem 2%;
         }
 
         .button_arrow {
@@ -77,36 +77,40 @@
     </div>
 
     <div class="up">
-        <button class="button">
+        <button class="button" onclick="forward()">
             <div class="button_arrow button_arrow_up"></div>
         </button>
     </div>
 
 
     <div class="left-right">
-        <button class="button">
+        <button class="button" onclick="left()">
             <div class="button_arrow button_arrow_left"></div>
         </button>
 
-        <button class="button">
+        <button class="button" onclick="stop()">
+            <div class="button_arrow"></div>
+        </button>
+
+        <button class="button" onclick="right()">
             <div class="button_arrow button_arrow_right"></div>
         </button>
     </div>
 
 
     <div class="down">
-        <button class="button">
+        <button class="button" onclick="backward()">
             <div class="button_arrow button_arrow_down"></div>
         </button>
     </div>
 
     <div>
 
-        <button class="button button_auto">
+        <button class="button button_auto" onclick="auto()">
             Start
         </button>
 
-        <button class="button button_auto">
+        <button class="button button_auto" onclick="finish()">
             Finish
         </button>
     </div>
@@ -132,5 +136,27 @@
     function updateIpAddress() {
         ipAddress = ipInput.value;
     }
+
+    function forward() {
+        fetch('http://' + ipAddress + '/forward')
+    }
+
+    function backward() {
+        fetch('http://' + ipAddress + '/backward')
+    }
+
+    function left() {
+        fetch('http://' + ipAddress + '/left')
+    }
+
+    function right() {
+        fetch('http://' + ipAddress + '/right')
+    }
+
+    function stop() {
+        fetch('http://' + ipAddress + '/stop')
+    }
+
+
 </script>
 </html>
