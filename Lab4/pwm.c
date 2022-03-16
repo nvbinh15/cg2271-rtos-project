@@ -22,13 +22,14 @@ static void delay(volatile uint32_t nof) {
   }
 }
 
+/* Initialize PWM module */
 void initPWM(void) {
 	// Enable Clock Gating for PORTB
-	SIM_SCGC5 |= SIM_SCGC5_PORTB_MASK;
+	SIM_SCGC5 |= SIM_SCGC5_PORTB_MASK; // SIM_SCGC5 != (1ul << 10);
 	
-	// Configure Mode 3 for the PWM pin operation
-	PORTB->PCR[PTB0_Pin] &= ~PORT_PCR_MUX_MASK;
-	PORTB->PCR[PTB0_Pin] |= PORT_PCR_MUX(3);
+	// Configure Mode 3 for the PWM pin operation (alternate 3 -> PWM)
+	PORTB->PCR[PTB0_Pin] &= ~PORT_PCR_MUX_MASK;	// clear PORTB->PCR[10:8]
+	PORTB->PCR[PTB0_Pin] |= PORT_PCR_MUX(3);	// PORTB->PCR[10:8] = 011;
 	
 	PORTB->PCR[PTB1_Pin] &= ~PORT_PCR_MUX_MASK;
 	PORTB->PCR[PTB1_Pin] |= PORT_PCR_MUX(3);	
@@ -36,27 +37,27 @@ void initPWM(void) {
 	// Enable Clock Gating for Timer1
 	SIM->SCGC6 |= SIM_SCGC6_TPM1_MASK;
 	
-	// Select clock for TPM module
-	SIM->SOPT2 &= ~SIM_SOPT2_TPMSRC_MASK;
-	SIM->SOPT2 |= SIM_SOPT2_TPMSRC(1);
+	// Select internal clock for TPM module
+	SIM->SOPT2 &= ~SIM_SOPT2_TPMSRC_MASK;	
+	SIM->SOPT2 |= SIM_SOPT2_TPMSRC(1);	// SIM->SOPT2[25:24] = 01
 	
 	// Set modulo value 20971520 / 128 = 163840 / 3276 = 50 Hz
 	// TPM1->MOD = 3276;
 	
-	// Set modulo value 48000000 / 128 = 375000 / 7500 = 50 Hz
-	//TPM1->MOD = 7500;
+	// Set modulo value 48000000 / 128 (prescaler) = 375000; 375000 / 7500 = 50 Hz
+	TPM1->MOD = 7500;
 	
 	// Edge-Aligned PWM
 	// Update SnC register: CMOD = 01, PS = 111 (128)
-	TPM1->SC &= ~((TPM_SC_CMOD_MASK) | (TPM_SC_PS_MASK));
-	TPM1->SC |= (TPM_SC_CMOD(1) | TPM_SC_PS(7));
-	TPM1->SC &= ~(TPM_SC_CPWMS_MASK);
-	
-	// Enable PWM on TPM1 Channel 0 -> PTB0
+	TPM1->SC &= ~((TPM_SC_CMOD_MASK) | (TPM_SC_PS_MASK));	// clear previous data
+	TPM1->SC |= (TPM_SC_CMOD(1) | TPM_SC_PS(7));			// CMOD = 01 -> select internal clock, PS = 111 -> prescaler = 128
+	TPM1->SC &= ~(TPM_SC_CPWMS_MASK);						// CPWMS = 0 -> count up
+
+	// Enable PWM on TPM1 Channel 0 -> PTB0, B bits are 1, A bits are 0 for edge-align
 	TPM1_C0SC &= ~((TPM_CnSC_ELSB_MASK) | (TPM_CnSC_ELSA_MASK) | (TPM_CnSC_MSB_MASK) | (TPM_CnSC_MSA_MASK));
 	TPM1_C0SC |= (TPM_CnSC_ELSB(1) | TPM_CnSC_MSB(1));
 	
-	// Enable PWM on TPM1 Channel 1 -> PTB1
+	// Enable PWM on TPM1 Channel 1 -> PTB1, B bits are 1, A bits are 0 for edge-align
 	TPM1_C1SC &= ~((TPM_CnSC_ELSB_MASK) | (TPM_CnSC_ELSA_MASK) | (TPM_CnSC_MSB_MASK) | (TPM_CnSC_MSA_MASK));
 	TPM1_C1SC |= (TPM_CnSC_ELSB(1) | TPM_CnSC_MSB(1));
 }
@@ -67,8 +68,8 @@ int main(void) {
 	int count = 0;
 	
 	// Set TPM1_C0V
-	//TPM1_C0V = 0x0EA6; // 0x0EA6 = 3750 = 7500 / 2 -> 50% duty cycle
-	//TPM1_C1V = 0x0753; // 0x0753 = 1875 = 7500 / 4 -> 25% duty cycle
+	TPM1_C0V = 0x0EA6; // 0x0EA6 = 3750 = 7500 / 2 -> 50% duty cycle
+	TPM1_C1V = 0x0753; // 0x0753 = 1875 = 7500 / 4 -> 25% duty cycle
 	
 	while (1) {
 		if (count == 7) {

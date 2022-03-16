@@ -13,10 +13,10 @@ void initSwitch(void) {
 	/* Select GPIO and enable pull-up resistors and interrupts
 	on falling edges of pin connected to switch */
 	PORTD->PCR[SW_POS] |= (
-			PORT_PCR_MUX(1) | 
-			PORT_PCR_PS_MASK | 
-			PORT_PCR_PS_MASK | 
-			PORT_PCR_IRQC(0x0a)
+			PORT_PCR_MUX(1) |    // GPIO
+			PORT_PCR_PS_MASK |   // Enable pull resistor
+			PORT_PCR_PE_MASK |   // Pull up
+			PORT_PCR_IRQC(0x0a)  // 1010 interrupt on falling edge
 	);
 	
 	// Set PORT D Switch bit to input

@@ -17,39 +17,41 @@ volatile int led_id = 0;
 
 void initSwitch(void) {
 	// enable clock for PortD
-	SIM->SCGC5 |= (SIM_SCGC5_PORTD_MASK);	
+	SIM->SCGC5 |= (SIM_SCGC5_PORTD_MASK);	// SIM->SCGC5 != (1ul << 12);
 	
 	/* Select GPIO and enable pull-up resistors and interrupts
 	on falling edges of pin connected to switch */
 	PORTD->PCR[SW_POS] |= (
-			PORT_PCR_MUX(1) | 
-			PORT_PCR_PS_MASK | 
-			PORT_PCR_PS_MASK | 
-			PORT_PCR_IRQC(0x0a)
+			PORT_PCR_MUX(1) | 	// enable GPIO
+			PORT_PCR_PE_MASK | 	// enable the pull register
+			PORT_PCR_PS_MASK | 	// pull up
+			PORT_PCR_IRQC(0x0a)	// IRQC = 1010 -> interrupt on falling edge
 	);
 	
 	// Set PORT D Switch bit to input
-	PTD->PDDR &= ~MASK(SW_POS);
+	PTD->PDDR &= ~MASK(SW_POS); // PTD->PDDR = 0
 	
 	// Enable Interrupts
-	NVIC_SetPriority(PORTD_IRQn, 2);
-	NVIC_ClearPendingIRQ(PORTD_IRQn);
-	NVIC_EnableIRQ(PORTD_IRQn);
+	NVIC_SetPriority(PORTD_IRQn, 2);	//	IRP[7] |= (1ul << 31);
+	NVIC_ClearPendingIRQ(PORTD_IRQn);	
+	NVIC_EnableIRQ(PORTD_IRQn);			//	NVIC_ISER
 }
 
 void initLED(void) {
 	// Enable Clock to PORTB and PORTD
-	SIM->SCGC5 |= ((SIM_SCGC5_PORTB_MASK) | (SIM_SCGC5_PORTD_MASK));
+	SIM->SCGC5 |= ((SIM_SCGC5_PORTB_MASK) | (SIM_SCGC5_PORTD_MASK)); //	SIM->SCGC5 |= (1ul << 10) | (1ul << 12);
 	
-	// Configure MUX settings to make all 3 pins GPIO
+	// Configure MUX settings to make all 3 pins GPIO (PCR[10:8] = 001)
 	PORTB->PCR[RED_LED] &= ~PORT_PCR_MUX_MASK;
 	PORTB->PCR[RED_LED] |= PORT_PCR_MUX(1);
+
 	PORTB->PCR[GREEN_LED] &= ~PORT_PCR_MUX_MASK;
 	PORTB->PCR[GREEN_LED] |= PORT_PCR_MUX(1);
+
 	PORTD->PCR[BLUE_LED] &= ~PORT_PCR_MUX_MASK;
 	PORTD->PCR[BLUE_LED] |= PORT_PCR_MUX(1);
 	
-	// Set Data Direction Registers for PortB and PortD
+	// Set Data Direction Registers for PortB and PortD (PDDR = 1)
 	PTB->PDDR |= (MASK(RED_LED) | MASK(GREEN_LED));
 	PTD->PDDR |= MASK(BLUE_LED);
 }
