@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Controller</title>
 
     <style>
         .button {
@@ -71,20 +71,21 @@
     <div>
         <form action="">
             <label>IP Address: </label>
-            <input type="text" id="ip" name="IP Address" value="192.168.43.221">
+            <input type="text" id="ip" name="IP Address" value="172.20.10.4">
             <input type="submit" id="submit-ip" value="Submit">
         </form>
     </div>
 
+
     <div class="up">
-        <button class="button" onclick="forward()">
+        <button class="button" onmousedown="forward()" onmouseup="stop()">
             <div class="button_arrow button_arrow_up"></div>
         </button>
     </div>
 
 
     <div class="left-right">
-        <button class="button" onclick="left()">
+        <button class="button" onmousedown="left()" onmouseup="stop()">
             <div class="button_arrow button_arrow_left"></div>
         </button>
 
@@ -92,14 +93,14 @@
             <div class="button_arrow"></div>
         </button>
 
-        <button class="button" onclick="right()">
+        <button class="button" onmousedown="right()" onmouseup="stop()">
             <div class="button_arrow button_arrow_right"></div>
         </button>
     </div>
 
 
     <div class="down">
-        <button class="button" onclick="backward()">
+        <button class="button" onmousedown="backward()" onmouseup="stop()">
             <div class="button_arrow button_arrow_down"></div>
         </button>
     </div>
@@ -158,5 +159,31 @@
     }
 
 
+    document.addEventListener('keydown', function(e) {
+    switch (e.keyCode) {
+        case 37: // left
+            left();
+            break;
+        case 38: // up
+            forward();
+            break;
+        case 39: // right
+            right();
+            break;
+        case 40: // down
+            backward();
+            break;
+        case 8: // space
+            stop();
+            break;
+    }
+    });
+
+    document.addEventListener('keyup', function(e) {
+       stop();
+    });
+
+
 </script>
+
 </html>
