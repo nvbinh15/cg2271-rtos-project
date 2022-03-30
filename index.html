@@ -45,30 +45,6 @@
             transform: translateX(25%) rotate(45deg);
         }
 
-        .button_arrow_topleft {
-            border-bottom: 1px solid rgba(0, 0, 0.3);
-            border-left: 1px solid rgba(0, 0, 0.3);
-            transform: translateX(5%) rotate(90deg);
-        }
-
-        .button_arrow_topright {
-            border-bottom: 1px solid rgba(0, 0, 0.3);
-            border-left: 1px solid rgba(0, 0, 0.3);
-            transform: translateX(-5%) rotate(180deg);
-        }
-
-        .button_arrow_downleft {
-            border-bottom: 1px solid rgba(0, 0, 0.3);
-            border-left: 1px solid rgba(0, 0, 0.3);
-            transform: translateX(5%) rotate(0deg);
-        }
-
-        .button_arrow_downright {
-            border-bottom: 1px solid rgba(0, 0, 0.3);
-            border-left: 1px solid rgba(0, 0, 0.3);
-            transform: translateX(-5%) rotate(-90deg);
-        }
-
         body {
             font-family: sans-serif;
             text-align: center;
@@ -102,22 +78,14 @@
 
 
     <div class="up">
-        <button class="button" onmousedown="" onmouseup="stop()">
-            <div class="button_arrow button_arrow_topleft"></div>
-        </button>
-
-        <button class="button" onmousedown="forward()" onmouseup="stop()">
+        <button class="button" onmousedown="forward()" onmouseup="stopForward()">
             <div class="button_arrow button_arrow_up"></div>
-        </button>
-
-        <button class="button" onmousedown="" onmouseup="stop()">
-            <div class="button_arrow button_arrow_topright"></div>
         </button>
     </div>
 
 
     <div class="left-right">
-        <button class="button" onmousedown="left()" onmouseup="stop()">
+        <button class="button" onmousedown="left()" onmouseup="stopLeft()">
             <div class="button_arrow button_arrow_left"></div>
         </button>
 
@@ -125,23 +93,15 @@
             <div class="button_arrow"></div>
         </button>
 
-        <button class="button" onmousedown="right()" onmouseup="stop()">
+        <button class="button" onmousedown="right()" onmouseup="stopRight()">
             <div class="button_arrow button_arrow_right"></div>
         </button>
     </div>
 
 
     <div class="down">
-        <button class="button" onmousedown="" onmouseup="stop()">
-            <div class="button_arrow button_arrow_downleft"></div>
-        </button>
-
-        <button class="button" onmousedown="backward()" onmouseup="stop()">
+        <button class="button" onmousedown="backward()" onmouseup="stopBackward()">
             <div class="button_arrow button_arrow_down"></div>
-        </button>
-
-        <button class="button" onmousedown="" onmouseup="stop()">
-            <div class="button_arrow button_arrow_downright"></div>
         </button>
     </div>
 
@@ -198,6 +158,21 @@
         fetch('http://' + ipAddress + '/stop')
     }
 
+    function stopForward() {
+        fetch('http://' + ipAddress + '/stopForward')
+    }
+
+    function stopLeft() {
+        fetch('http://' + ipAddress + '/stopLeft')
+    }
+
+    function stopBackward() {
+        fetch('http://' + ipAddress + '/stopBackward')
+    }
+
+    function stopRight() {
+        fetch('http://' + ipAddress + '/stopRight')
+    }
 
     document.addEventListener('keydown', function(e) {
     switch (e.keyCode) {
@@ -220,7 +195,20 @@
     });
 
     document.addEventListener('keyup', function(e) {
-       stop();
+    switch (e.keyCode) {
+        case 37: // left
+            stopLeft();
+            break;
+        case 38: // up
+            stopForward();
+            break;
+        case 39: // right
+            stopRight();
+            break;
+        case 40: // down
+            stopBackward();
+            break;
+    }
     });
 
 

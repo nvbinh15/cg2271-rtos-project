@@ -12,12 +12,11 @@
 #include "sound.h"
  
 void delay (unsigned long delay);
-volatile uint8_t data = 0;
-volatile uint8_t prev_data = 0;
+volatile uint8_t data;
 
 osEventFlagsId_t 
 	flagForward, flagBackward, flagRight, flagLeft, flagStop,
-	flagRunningSound
+	flagRunningSound, flagEndingSound
 ;
 
 
@@ -41,7 +40,7 @@ void UART2_IRQHandler(void) {
 void tForward(void *argument) {
 	
 	for (;;) {
-		osEventFlagsWait(flagForward, 0x0001, osFlagsNoClear, osWaitForever);
+		osEventFlagsWait(flagForward, 0x01, osFlagsWaitAny, osWaitForever);
 		forward();
 	}
 	
@@ -50,7 +49,7 @@ void tForward(void *argument) {
 void tBackward(void *argument) {
 	
 	for (;;) {
-		osEventFlagsWait(flagBackward, 0x0001, osFlagsNoClear, osWaitForever);
+		osEventFlagsWait(flagBackward, 0x01, osFlagsWaitAny, osWaitForever);
 		backward();
 	}
 	
@@ -59,7 +58,7 @@ void tBackward(void *argument) {
 void tRight(void *argument) {
 	
 	for (;;) {
-		osEventFlagsWait(flagRight, 0x0001, osFlagsNoClear, osWaitForever);
+		osEventFlagsWait(flagRight, 0x01, osFlagsWaitAny, osWaitForever);
 		right();
 	}
 	
@@ -68,7 +67,7 @@ void tRight(void *argument) {
 void tLeft(void *argument) {
 	
 	for (;;) {
-		osEventFlagsWait(flagLeft, 0x0001, osFlagsNoClear, osWaitForever);
+		osEventFlagsWait(flagLeft, 0x01, osFlagsWaitAny, osWaitForever);
 		left();
 	}
 	
@@ -77,13 +76,13 @@ void tLeft(void *argument) {
 void tStop(void *argument) {
 	
 	for (;;) {
-		osEventFlagsWait(flagStop, 0x0001, osFlagsNoClear, osWaitForever);
-		/*
-		osEventFlagsClear(flagForward, 0x0001);
-		osEventFlagsClear(flagBackward, 0x0001);
-		osEventFlagsClear(flagRight, 0x0001);
-		osEventFlagsClear(flagLeft, 0x0001);
-		*/
+		osEventFlagsWait(flagStop, 0x01, osFlagsWaitAny, osWaitForever);
+		
+		osEventFlagsClear(flagForward, 0x01);
+		osEventFlagsClear(flagBackward, 0x01);
+		osEventFlagsClear(flagRight, 0x01);
+		osEventFlagsClear(flagLeft, 0x01);
+		
 		stop();
 	}
 	
@@ -92,7 +91,7 @@ void tStop(void *argument) {
 void tRunningSound(void *argument) {
 	
 	for (;;) {
-		osEventFlagsWait(flagStop, 0x01, osFlagsNoClear, osWaitForever);
+		osEventFlagsWait(flagRunningSound, 0x01, osFlagsWaitAny, osWaitForever);
 		play_running_sound();
 	}
 }
@@ -108,28 +107,24 @@ void app_main (void *argument) {
   for (;;) {
 		osEventFlagsSet(flagRunningSound, 0x01);
 		
-		if (data != prev_data) {
-			if (data == 0x30) { // forward
-				osEventFlagsSet(flagForward, 0x0001);
-				//forward();
-			} else if (data == 0x31) { // backward
-				osEventFlagsSet(flagBackward, 0x0001);
-				//backward();
-			} else if (data == 0x32) { // left
-				osEventFlagsSet(flagLeft, 0x0001);
-				//left();
-			} else if (data == 0x33) { // right
-				osEventFlagsSet(flagRight, 0x0001);
-				//right();
-			} else if (data == 0x34) { // stop
-				osEventFlagsSet(flagStop, 0x0001);
-				//stop();
-			}	else {
-				osEventFlagsSet(flagStop, 0x0001);
-				//stop();
-			}
-			
-			prev_data = data;
+		if (data == 0x30) { // forward
+			osEventFlagsSet(flagForward, 0x01);
+		} else if (data == 0x31) { // backward
+			osEventFlagsSet(flagBackward, 0x01);
+		} else if (data == 0x32) { // left
+			osEventFlagsSet(flagLeft, 0x01);
+		} else if (data == 0x33) { // right
+			osEventFlagsSet(flagRight, 0x01);
+		} else if (data == 0x34) { // stop
+			osEventFlagsSet(flagStop, 0x01);
+		} else if (data == 0x35) {
+			osEventFlagsClear(flagForward, 0x01);
+		} else if (data == 0x36) {
+			osEventFlagsClear(flagBackward, 0x01);
+		} else if (data == 0x37) {
+			osEventFlagsClear(flagLeft, 0x01);
+		} else if (data == 0x38) {
+			osEventFlagsClear(flagRight, 0x01);
 		}
 		
 
