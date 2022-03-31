@@ -21,7 +21,7 @@ Target DLL:      CMSIS_AGDI.dll V1.32.0.0
 Dialog DLL:      TARMCM1.DLL V1.14.1.0
  
 <h2>Project:</h2>
-C:\Users\Van Binh\Desktop\brain\myBrain.uvprojx
+C:\Users\Van Binh\Desktop\cg2271-project\brain\myBrain.uvprojx
 Project File Date:  03/25/2022
 
 <h2>Output:</h2>
@@ -32,7 +32,9 @@ compiling uart.c...
 compiling main.c...
 sound.h(105): warning:  #1-D: last line of file ends without a newline
   #endif
-main.c: 1 warning, 0 errors
+main.c(178): warning:  #1-D: last line of file ends without a newline
+  }
+main.c: 2 warnings, 0 errors
 compiling pwm.c...
 compiling i2c.c...
 compiling sound.c...
@@ -42,12 +44,12 @@ sound.c(100): warning:  #1-D: last line of file ends without a newline
   	
 sound.c: 2 warnings, 0 errors
 assembling startup_MKL25Z4.s...
-compiling rtx_lib.c...
 compiling RTX_Config.c...
+compiling rtx_lib.c...
 compiling system_MKL25Z4.c...
 linking...
-Program Size: Code=10812 RO-data=500 RW-data=5632 ZI-data=360  
-".\Objects\myBrain.axf" - 0 Error(s), 3 Warning(s).
+Program Size: Code=11180 RO-data=500 RW-data=5640 ZI-data=360  
+".\Objects\myBrain.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -83,25 +85,25 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:RTOS2:Keil RTX5:Library:5.5.1
       Include file:  CMSIS\RTOS2\RTX\Include\rtx_os.h
-      Source file:   CMSIS\RTOS2\RTX\Template\main.c
-      Source file:   CMSIS\RTOS2\RTX\Template\Mutex.c
-      Source file:   CMSIS\RTOS2\RTX\Template\Events.c
-      Source file:   CMSIS\RTOS2\RTX\Template\Semaphore.c
-      Source file:   CMSIS\RTOS2\RTX\Template\MemPool.c
       Include file:  CMSIS\RTOS2\RTX\Config\RTX_Config.h
       Source file:   CMSIS\RTOS2\RTX\Config\RTX_Config.c
-      Source file:   CMSIS\RTOS2\RTX\Template\MsgQueue.c
-      Source file:   CMSIS\RTOS2\RTX\Template\svc_user.c
-      Library file:  CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib
+      Source file:   CMSIS\RTOS2\RTX\Template\main.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Events.c
+      Source file:   CMSIS\RTOS2\RTX\Template\MemPool.c
       Source file:   CMSIS\RTOS2\RTX\Template\Thread.c
+      Source file:   CMSIS\RTOS2\RTX\Template\svc_user.c
       Source file:   CMSIS\RTOS2\RTX\Source\rtx_lib.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Mutex.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Semaphore.c
       Source file:   CMSIS\RTOS2\RTX\Template\Timer.c
+      Library file:  CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib
+      Source file:   CMSIS\RTOS2\RTX\Template\MsgQueue.c
 
    * Component: Keil::Device:Startup:2.5.0
       Source file:   Device\Source\system_MKL25Z4.c
       Source file:   Device\Source\ARM\startup_MKL25Z4.s
       Include file:  Device\Source\system_MKL25Z4.h
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>
