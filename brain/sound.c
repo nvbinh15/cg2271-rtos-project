@@ -35,12 +35,12 @@ int running_song[] = {
 
 /* Initialize PWM module */
 void initSound(void) {
-	// Enable Clock Gating for PORTB
-	SIM_SCGC5 |= SIM_SCGC5_PORTA_MASK; // SIM_SCGC5 != (1ul << 10);
+	// Enable Clock Gating for PORTE
+	SIM_SCGC5 |= SIM_SCGC5_PORTE_MASK; // SIM_SCGC5 != (1ul << 10);
 	
 	// Configure Mode 3 for the PWM pin operation (alternate 3 -> PWM)
-	PORTA->PCR[PTA13_Pin] &= ~PORT_PCR_MUX_MASK;
-	PORTA->PCR[PTA13_Pin] |= PORT_PCR_MUX(3);	
+	PORTE->PCR[PTE21_PIN] &= ~PORT_PCR_MUX_MASK;
+	PORTE->PCR[PTE21_PIN] |= PORT_PCR_MUX(3);	
 	
 	// Enable Clock Gating for Timer1
 	SIM->SCGC6 |= SIM_SCGC6_TPM1_MASK;
