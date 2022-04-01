@@ -230,98 +230,99 @@
         fetch('http://' + ipAddress + '/turnLeftBackward')
     }
 
-    var l, r, u, d
-    l = r = u = d = false
+    let l, r, u, d;
+    l = r = u = d = 0;
+    let dir = 0; 
+    /*
+    forward: 1
+    backward: 2
+    left: 3
+    right: 4
+    leftF: 5
+    rightF: 6
+    leftB: 7
+    rightB: 8
+    stop: 0
+    */
+
+    function check() {
+        if (l == 0 && r == 0 && u == 0 && d == 0 && dir != 0) {
+            stop();
+            dir = 0;
+        } else if (l == 1 && u == 1 && dir != 5) {
+            dir = 5;
+            turnLeftForward();
+        } else if (r == 1 && u == 1 && dir != 6) {
+            dir = 6;
+            turnRightForward();
+        } else if (l == 1 && d == 1 && dir != 7) {
+            dir = 7;
+            turnLeftBackward();
+        } else if (r == 1 && d == 1 && dir != 8) {
+            dir = 8;
+            turnRightBackward();
+        } else if (l == 1 && u == 0 && d == 0 && dir != 3) {
+            dir = 3;
+            left();
+        } else if (r == 1 && u == 0 && d == 0 && dir != 4) {
+            dir = 4;
+            right();
+        } else if (u == 1 && r == 0 && l == 0 && dir != 1) {
+            dir = 1;
+            forward();
+        } else if (d == 1 && r == 0 && l == 0 && dir != 2) {
+            dir = 2;
+            backward();
+        }
+    }
 
     document.addEventListener('keydown', function(e) {
     switch (e.keyCode) {
         case 37: // left
-            left();
+            l = 1;
             break;
         case 38: // up
-            forward();
+            u = 1;
+            d = 0;
             break;
         case 39: // right
-            right();
+            r = 1;
             break;
         case 40: // down
-            backward();
+            d = 1;
+            u = 0;
             break;
         case 8: // space
-            stop();
+            l = u = r = d = 0;
             break;
     }
 
-    // if (e.keyCode == 37) { // left
-    //     l = true;
-    // } else if (e.keycode == 38) { // up
-    //     u = true;
-    //     d = false;
-    // } else if (e.keycode == 39) { // right
-    //     r = true;
-    // } else if (e.keycode == 40) { // down
-    //     d = true;
-    //     u = false;
-    // } else if (e.keycode == 8) { // space
-    //     stop();
-    //     l = r = u = d = false;
-    // }
-
-    // if (l == true && u == true) {
-    //     turnLeftForward();
-    // }
-
-    // if (l && u) {
-    //     turnLeftForward();
-    // } else if (l && d) {
-    //     turnLeftBackWard();
-    // } else if (r && u) {
-    //     turnRightForward();
-    // } else if (r && d) {
-    //     turnRightBackward();
-    // } else if (r) {
-    //     right();
-    // } else if (l) {
-    //     left();
-    // } else if (u) {
-    //     forward();
-    // } else if (d) {
-    //     backward();
-    // }
+    if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 8) {
+        check();
+    }
     });
 
     document.addEventListener('keyup', function(e) {
     switch (e.keyCode) {
         case 37: // left
-            stopLeft();
+            l = 0;
             break;
         case 38: // up
-            stopForward();
+            u = 0;
             break;
         case 39: // right
-            stopRight();
+            r = 0;
             break;
         case 40: // down
-            stopBackward();
+            d = 0;
             break;
+        case 8: 
+            l = u = r = d = 0;
     }
-    // if (e.keyCode == 37) { // left
-    //     l = false;
-    //     stopLeft();
-    // } else if (e.keycode == 38) { // up
-    //     u = false;
-    //     stopForward();
-    // } else if (e.keycode == 39) { // right
-    //     r = false;
-    //     stopRight();
-    // } else if (e.keycode == 40) { // down
-    //     d = false;
-    //     stopBackward();
-    // } else if (e.keycode == 8) { // space
-    //     stop();
-    //     l = r = u = d = false;
-    // }
 
+    if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 8) {
+        check();
+    }
     });
 
 

@@ -157,6 +157,7 @@ void app_main (void *argument) {
 			osEventFlagsClear(flagTurnLeftBackward, 0x01);
 		
 			osEventFlagsSet(flagStop, 0x01);
+			
 		} else if (data == 0x35) {
 			osEventFlagsClear(flagForward, 0x01);
 		} else if (data == 0x36) {
