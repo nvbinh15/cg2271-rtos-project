@@ -10,6 +10,7 @@
 #include "uart.h"
 #include "i2c.h"
 #include "sound.h"
+#include "motor.h"
  
 void delay (unsigned long delay);
 volatile uint8_t data;
@@ -89,7 +90,7 @@ void tTurnRightForward(void *argument) {
 
 	for (;;) {
 		osEventFlagsWait(flagTurnRightForward, 0x01, osFlagsWaitAny, osWaitForever);
-		turnRightForward();
+		turnRightForward(50);
 	}
 }
 
@@ -97,7 +98,7 @@ void tTurnRightBackward(void *argument) {
 
 	for (;;) {
 		osEventFlagsWait(flagTurnRightBackWard, 0x01, osFlagsWaitAny, osWaitForever);
-		turnRightBackward();
+		turnRightBackward(50);
 	}
 }
 
@@ -105,7 +106,7 @@ void tTurnLefttForward(void *argument) {
 
 	for (;;) {
 		osEventFlagsWait(flagTurnLeftForward, 0x01, osFlagsWaitAny, osWaitForever);
-		turnLeftForward();
+		turnLeftForward(50);
 	}
 }
 
@@ -113,7 +114,7 @@ void tTurnLeftBackward(void *argument) {
 
 	for (;;) {
 		osEventFlagsWait(flagTurnLeftBackward, 0x01, osFlagsWaitAny, osWaitForever);
-		turnLeftBackward();
+		turnLeftBackward(50);
 	}
 }
 
@@ -184,7 +185,7 @@ int main (void) {
 	
   // System Initialization
   SystemCoreClockUpdate();
-	initMotor();
+	MotorsInit();
 	initSound();
 	offLED();
 	
