@@ -108,7 +108,7 @@ void forward(void) {
 }
 
 /**
- * Move forward with 100% Duty cycle
+ * Move backward with 100% Duty cycle
  */
 void backward(void) {
   leftMove(REVERSE, 100);
