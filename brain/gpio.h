@@ -4,6 +4,9 @@
 #include "MKL25Z4.h"
 
 #define MASK(x)  (1 << (x))
+#define RED_LED 		18 	// PortB Pin 18
+#define GREEN_LED 	19 	// PortB Pin 19
+#define BLUE_LED 		1 	// PortD Pin 1
 
 
 typedef enum GPIO_state {
@@ -20,5 +23,13 @@ void backward(void);
 void right(void);
 void left(void);
 void stop(void);
+
+void turnRightForward(void);
+void turnLeftForward(void);
+void turnRightBackward(void);
+void turnLeftBackward(void);
+
+void InitLED(void);
+void offLED(void);
 
 #endif

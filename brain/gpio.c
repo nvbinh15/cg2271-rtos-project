@@ -113,3 +113,55 @@ void stop(void) {
       GPIOSetOutput(PORTB, 3, HIGH);	
 }
 
+void turnRightForward(void) {
+      GPIOSetOutput(PORTB, 0, HIGH);
+      GPIOSetOutput(PORTB, 1, LOW);
+      GPIOSetOutput(PORTB, 2, HIGH);
+      GPIOSetOutput(PORTB, 3, HIGH);	
+}
+
+void turnLeftForward(void) {
+      GPIOSetOutput(PORTB, 0, HIGH);
+      GPIOSetOutput(PORTB, 1, HIGH);
+      GPIOSetOutput(PORTB, 2, HIGH);
+      GPIOSetOutput(PORTB, 3, LOW);	
+}
+
+void turnRightBackward(void) {
+      GPIOSetOutput(PORTB, 0, LOW);
+      GPIOSetOutput(PORTB, 1, HIGH);
+      GPIOSetOutput(PORTB, 2, HIGH);
+      GPIOSetOutput(PORTB, 3, HIGH);	
+}
+
+void turnLeftBackward(void) {
+      GPIOSetOutput(PORTB, 0, HIGH);
+      GPIOSetOutput(PORTB, 1, HIGH);
+      GPIOSetOutput(PORTB, 2, LOW);
+      GPIOSetOutput(PORTB, 3, HIGH);	
+}
+
+/* Initialize LEDs */
+void InitLED(void) {
+	// Enable Clock to PORTB and PORTD
+	SIM->SCGC5 |= ((SIM_SCGC5_PORTB_MASK) | (SIM_SCGC5_PORTD_MASK));
+
+	// Configure MUX settings to make all 3 pins GPIO
+	PORTB->PCR[RED_LED] &= ~PORT_PCR_MUX_MASK;
+	PORTB->PCR[RED_LED] |= PORT_PCR_MUX(1);
+	PORTB->PCR[GREEN_LED] &= ~PORT_PCR_MUX_MASK;
+	PORTB->PCR[GREEN_LED] |= PORT_PCR_MUX(1);
+	PORTD->PCR[BLUE_LED] &= ~PORT_PCR_MUX_MASK;
+	PORTD->PCR[BLUE_LED] |= PORT_PCR_MUX(1);
+
+	// Set Data Direction Registers for PortB and PortD
+	PTB->PDDR |= (MASK(RED_LED) | MASK(GREEN_LED));
+	PTD->PDDR |= MASK(BLUE_LED);
+}
+
+/* Turn off all the LEDs */
+void offLED(void) {
+	PTB->PDOR |= (MASK(GREEN_LED) | MASK(RED_LED));
+	PTD->PDOR |= MASK(BLUE_LED);
+}
+

@@ -17,6 +17,7 @@ volatile uint8_t data;
 osEventFlagsId_t 
 	flagForward, flagBackward, flagRight, flagLeft, flagStop,
 	flagRunningSound, flagEndingSound
+
 ;
 
 
@@ -77,15 +78,45 @@ void tStop(void *argument) {
 	
 	for (;;) {
 		osEventFlagsWait(flagStop, 0x01, osFlagsWaitAny, osWaitForever);
-		
-		osEventFlagsClear(flagForward, 0x01);
+				osEventFlagsClear(flagForward, 0x01);
 		osEventFlagsClear(flagBackward, 0x01);
 		osEventFlagsClear(flagRight, 0x01);
 		osEventFlagsClear(flagLeft, 0x01);
-		
 		stop();
 	}
 	
+}
+
+void tTurnRightForward(void *argument) {
+
+	for (;;) {
+		osEventFlagsWait(flagTurnRightForward, 0x01, osFlagsWaitAny, osWaitForever);
+		turnRightForward();
+	}
+}
+
+void tTurnRightBackward(void *argument) {
+
+	for (;;) {
+		osEventFlagsWait(flagTurnRightBackWard, 0x01, osFlagsWaitAny, osWaitForever);
+		turnRightBackward();
+	}
+}
+
+void tTurnLefttForward(void *argument) {
+
+	for (;;) {
+		osEventFlagsWait(flagTurnLeftForward, 0x01, osFlagsWaitAny, osWaitForever);
+		turnLeftForward();
+	}
+}
+
+void tTurnLeftBackward(void *argument) {
+
+	for (;;) {
+		osEventFlagsWait(flagTurnLeftBackward, 0x01, osFlagsWaitAny, osWaitForever);
+		turnLeftBackward();
+	}
 }
 
 void tRunningSound(void *argument) {
@@ -117,6 +148,7 @@ void app_main (void *argument) {
 			osEventFlagsSet(flagRight, 0x01);
 		} else if (data == 0x34) { // stop
 			osEventFlagsSet(flagStop, 0x01);
+
 		} else if (data == 0x35) {
 			osEventFlagsClear(flagForward, 0x01);
 		} else if (data == 0x36) {
@@ -137,6 +169,7 @@ int main (void) {
   SystemCoreClockUpdate();
 	initMotor();
 	initSound();
+	offLED();
 	
 	flagForward = osEventFlagsNew(NULL);
 	flagRight = osEventFlagsNew(NULL);
@@ -144,6 +177,11 @@ int main (void) {
 	flagLeft = osEventFlagsNew(NULL);
 	flagStop = osEventFlagsNew(NULL);
 	flagRunningSound = osEventFlagsNew(NULL);
+
+	flagTurnRightForward = osEventFlagsNew(NULL);
+	flagTurnLeftForward = osEventFlagsNew(NULL);
+	flagTurnRightBackWard = osEventFlagsNew(NULL);
+	flagTurnLeftBackward = osEventFlagsNew(NULL);
 
   UARTInit(UART2, PIN_PAIR_3, 9600, true);
  
@@ -155,6 +193,11 @@ int main (void) {
 	osThreadNew(tBackward, NULL, NULL);
 	osThreadNew(tLeft, NULL, NULL);
 	osThreadNew(tStop, NULL, NULL);
+
+	osThreadNew(tTurnRightForward, NULL, NULL);
+	osThreadNew(tTurnLefttForward, NULL, NULL);
+	osThreadNew(tTurnRightBackward, NULL, NULL);
+	osThreadNew(tTurnLeftBackward, NULL, NULL);
 	
 	osThreadNew(tRunningSound, NULL, NULL);
 	
