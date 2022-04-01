@@ -30,26 +30,22 @@ Rebuild target 'Target 1'
 compiling gpio.c...
 compiling uart.c...
 compiling main.c...
-sound.h(105): warning:  #1-D: last line of file ends without a newline
-  #endif
-main.c(178): warning:  #1-D: last line of file ends without a newline
+main.c(222): warning:  #1-D: last line of file ends without a newline
   }
-main.c: 2 warnings, 0 errors
+main.c: 1 warning, 0 errors
 compiling pwm.c...
-compiling i2c.c...
 compiling sound.c...
-sound.h(105): warning:  #1-D: last line of file ends without a newline
-  #endif
 sound.c(100): warning:  #1-D: last line of file ends without a newline
   	
-sound.c: 2 warnings, 0 errors
+sound.c: 1 warning, 0 errors
+compiling i2c.c...
 assembling startup_MKL25Z4.s...
-compiling RTX_Config.c...
 compiling rtx_lib.c...
+compiling RTX_Config.c...
 compiling system_MKL25Z4.c...
 linking...
-Program Size: Code=11180 RO-data=500 RW-data=5640 ZI-data=360  
-".\Objects\myBrain.axf" - 0 Error(s), 4 Warning(s).
+Program Size: Code=11572 RO-data=500 RW-data=5652 ZI-data=356  
+".\Objects\myBrain.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -84,26 +80,26 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.3.0
 
    * Component: ARM::CMSIS:RTOS2:Keil RTX5:Library:5.5.1
-      Include file:  CMSIS\RTOS2\RTX\Include\rtx_os.h
-      Include file:  CMSIS\RTOS2\RTX\Config\RTX_Config.h
-      Source file:   CMSIS\RTOS2\RTX\Config\RTX_Config.c
-      Source file:   CMSIS\RTOS2\RTX\Template\main.c
-      Source file:   CMSIS\RTOS2\RTX\Template\Events.c
-      Source file:   CMSIS\RTOS2\RTX\Template\MemPool.c
-      Source file:   CMSIS\RTOS2\RTX\Template\Thread.c
-      Source file:   CMSIS\RTOS2\RTX\Template\svc_user.c
-      Source file:   CMSIS\RTOS2\RTX\Source\rtx_lib.c
       Source file:   CMSIS\RTOS2\RTX\Template\Mutex.c
       Source file:   CMSIS\RTOS2\RTX\Template\Semaphore.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Thread.c
       Source file:   CMSIS\RTOS2\RTX\Template\Timer.c
-      Library file:  CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib
+      Source file:   CMSIS\RTOS2\RTX\Template\svc_user.c
+      Include file:  CMSIS\RTOS2\RTX\Include\rtx_os.h
+      Include file:  CMSIS\RTOS2\RTX\Config\RTX_Config.h
+      Source file:   CMSIS\RTOS2\RTX\Template\main.c
+      Source file:   CMSIS\RTOS2\RTX\Template\MemPool.c
+      Source file:   CMSIS\RTOS2\RTX\Config\RTX_Config.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Events.c
       Source file:   CMSIS\RTOS2\RTX\Template\MsgQueue.c
+      Library file:  CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib
+      Source file:   CMSIS\RTOS2\RTX\Source\rtx_lib.c
 
    * Component: Keil::Device:Startup:2.5.0
-      Source file:   Device\Source\system_MKL25Z4.c
       Source file:   Device\Source\ARM\startup_MKL25Z4.s
       Include file:  Device\Source\system_MKL25Z4.h
-Build Time Elapsed:  00:00:03
+      Source file:   Device\Source\system_MKL25Z4.c
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

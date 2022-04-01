@@ -102,7 +102,7 @@
 
 
     <div class="up">
-        <button class="button" onmousedown="" onmouseup="stop()">
+        <button class="button" onmousedown="turnLeftForward()" onmouseup="stop()">
             <div class="button_arrow button_arrow_topleft"></div>
         </button>
 
@@ -110,7 +110,7 @@
             <div class="button_arrow button_arrow_up"></div>
         </button>
 
-        <button class="button" onmousedown="turnRight()" onmouseup="stop()">
+        <button class="button" onmousedown="turnRightForward()" onmouseup="stop()">
             <div class="button_arrow button_arrow_topright"></div>
         </button>
     </div>
@@ -132,7 +132,7 @@
 
 
     <div class="down">
-        <button class="button" onmousedown="" onmouseup="stop()">
+        <button class="button" onmousedown="turnLeftBackward()" onmouseup="stop()">
             <div class="button_arrow button_arrow_downleft"></div>
         </button>
 
@@ -140,7 +140,7 @@
             <div class="button_arrow button_arrow_down"></div>
         </button>
 
-        <button class="button" onmousedown="" onmouseup="stop()">
+        <button class="button" onmousedown="turnRightBackward()" onmouseup="stop()">
             <div class="button_arrow button_arrow_downright"></div>
         </button>
     </div>
@@ -214,9 +214,24 @@
         fetch('http://' + ipAddress + '/stopRight')
     }
 
-    function turnRight() {
-        fetch('http://' + ipAddress + '/turnRight')
+    function turnRightForward() {
+        fetch('http://' + ipAddress + '/turnRightForward')
     }
+
+    function turnLeftForward() {
+        fetch('http://' + ipAddress + '/turnLeftForward')
+    }
+
+    function turnRightBackward() {
+        fetch('http://' + ipAddress + '/turnRightBackward')
+    }
+
+    function turnLeftBackward() {
+        fetch('http://' + ipAddress + '/turnLeftBackward')
+    }
+
+    var l, r, u, d
+    l = r = u = d = false
 
     document.addEventListener('keydown', function(e) {
     switch (e.keyCode) {
@@ -236,6 +251,43 @@
             stop();
             break;
     }
+
+    // if (e.keyCode == 37) { // left
+    //     l = true;
+    // } else if (e.keycode == 38) { // up
+    //     u = true;
+    //     d = false;
+    // } else if (e.keycode == 39) { // right
+    //     r = true;
+    // } else if (e.keycode == 40) { // down
+    //     d = true;
+    //     u = false;
+    // } else if (e.keycode == 8) { // space
+    //     stop();
+    //     l = r = u = d = false;
+    // }
+
+    // if (l == true && u == true) {
+    //     turnLeftForward();
+    // }
+
+    // if (l && u) {
+    //     turnLeftForward();
+    // } else if (l && d) {
+    //     turnLeftBackWard();
+    // } else if (r && u) {
+    //     turnRightForward();
+    // } else if (r && d) {
+    //     turnRightBackward();
+    // } else if (r) {
+    //     right();
+    // } else if (l) {
+    //     left();
+    // } else if (u) {
+    //     forward();
+    // } else if (d) {
+    //     backward();
+    // }
     });
 
     document.addEventListener('keyup', function(e) {
@@ -253,6 +305,23 @@
             stopBackward();
             break;
     }
+    // if (e.keyCode == 37) { // left
+    //     l = false;
+    //     stopLeft();
+    // } else if (e.keycode == 38) { // up
+    //     u = false;
+    //     stopForward();
+    // } else if (e.keycode == 39) { // right
+    //     r = false;
+    //     stopRight();
+    // } else if (e.keycode == 40) { // down
+    //     d = false;
+    //     stopBackward();
+    // } else if (e.keycode == 8) { // space
+    //     stop();
+    //     l = r = u = d = false;
+    // }
+
     });
 
 

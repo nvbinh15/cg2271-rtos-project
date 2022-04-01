@@ -113,10 +113,31 @@ void stop(void) {
       GPIOSetOutput(PORTB, 3, HIGH);	
 }
 
-void turnRight(void) {
+void turnRightForward(void) {
+      GPIOSetOutput(PORTB, 0, HIGH);
+      GPIOSetOutput(PORTB, 1, LOW);
+      GPIOSetOutput(PORTB, 2, HIGH);
+      GPIOSetOutput(PORTB, 3, HIGH);	
+}
+
+void turnLeftForward(void) {
+      GPIOSetOutput(PORTB, 0, HIGH);
+      GPIOSetOutput(PORTB, 1, HIGH);
+      GPIOSetOutput(PORTB, 2, HIGH);
+      GPIOSetOutput(PORTB, 3, LOW);	
+}
+
+void turnRightBackward(void) {
       GPIOSetOutput(PORTB, 0, LOW);
       GPIOSetOutput(PORTB, 1, HIGH);
       GPIOSetOutput(PORTB, 2, HIGH);
+      GPIOSetOutput(PORTB, 3, HIGH);	
+}
+
+void turnLeftBackward(void) {
+      GPIOSetOutput(PORTB, 0, HIGH);
+      GPIOSetOutput(PORTB, 1, HIGH);
+      GPIOSetOutput(PORTB, 2, LOW);
       GPIOSetOutput(PORTB, 3, HIGH);	
 }
 

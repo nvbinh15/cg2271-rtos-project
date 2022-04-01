@@ -24,7 +24,10 @@ void right(void);
 void left(void);
 void stop(void);
 
-void turnRight(void);
+void turnRightForward(void);
+void turnLeftForward(void);
+void turnRightBackward(void);
+void turnLeftBackward(void);
 
 void InitLED(void);
 void offLED(void);

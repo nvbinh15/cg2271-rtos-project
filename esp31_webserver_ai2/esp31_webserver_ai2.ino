@@ -124,8 +124,20 @@ void loop() {
     Serial2.write(0x38);
   }
 
-  if(req.indexOf("turnRight") != -1) {
+  if(req.indexOf("turnRightForward") != -1) {
     Serial2.write(0x39);
+  }
+
+  if(req.indexOf("turnLeftForward") != -1) {
+    Serial2.write(0x40);
+  }
+
+  if(req.indexOf("turnRightBackward") != -1) {
+    Serial2.write(0x41);
+  }
+
+  if(req.indexOf("turnLeftBackward") != -1) {
+    Serial2.write(0x42);
   }
 
   client.println("HTTP/1.1 200 OK");
