@@ -17,28 +17,28 @@ void initUART2 (uint32_t baud_rate) {
 	uint32_t divisor, bus_clock;
 	
 	// Enable clock to UART2 and PORTE
-	SIM->SCGC4 |= SIM_SCGC4_UART2_MASK;
-	SIM->SCGC5 |= SIM_SCGC5_PORTE_MASK;
+	SIM->SCGC4 |= SIM_SCGC4_UART2_MASK;	// SIM->SCGC4 |= (1UL << 12);
+	SIM->SCGC5 |= SIM_SCGC5_PORTE_MASK;	// SIM->SCGC5 |= (1ul << 13);
 	
-	// Connect UART pins for PTE22, PTE23
+	// Connect UART pins for PTE22, PTE23 -> ALT4 (docs table page 161)
 	PORTE->PCR[UART_TX_PORTE22] &= ~PORT_PCR_MUX_MASK;
-	PORTE->PCR[UART_TX_PORTE22] |= PORT_PCR_MUX(4);
+	PORTE->PCR[UART_TX_PORTE22] |= PORT_PCR_MUX(4);		// set PCR[10:8] to 100
 	
 	PORTE->PCR[UART_RX_PORTE23] &= ~PORT_PCR_MUX_MASK;
 	PORTE->PCR[UART_RX_PORTE23] |= PORT_PCR_MUX(4);	
 	
 	// Ensure Tx and Rx are disabled before configuration
-	UART2->C2 &= ~((UART_C2_TE_MASK) | (UART_C2_RE_MASK));
+	UART2->C2 &= ~((UART_C2_TE_MASK) | (UART_C2_RE_MASK));	//	UART->C2[3:2] = 00;
 	
 	// Set Baud Rate to the desired value
-	bus_clock = (DEFAULT_SYSTEM_CLOCK) / 2;
-	divisor = bus_clock / (baud_rate * 16);
-	UART2->BDH = UART_BDH_SBR(divisor >> 8);
-	UART2->BDL = UART_BDL_SBR(divisor);
+	bus_clock = (DEFAULT_SYSTEM_CLOCK) / 2;		// bus clock is half of system clock (default)
+	divisor = bus_clock / (baud_rate * 16);		// set divisor
+	UART2->BDH = UART_BDH_SBR(divisor >> 8);	// load 8 most significant bits of divisor
+	UART2->BDL = UART_BDL_SBR(divisor);			// load 8 least significant bits of divisor
 	
 	// No parity, 8-bits
-	UART2->C1 = 0;
-	UART2->S2 = 0;
+	UART2->C1 = 0;	// PE = 0 -> no parity; M = 0 -> 8-bits
+	UART2->S2 = 0;	
 	UART2->C3 = 0;
 	
 	//NVIC_SetPriority(UART2_IRQn, UART2_INT_PRIO);
@@ -46,20 +46,20 @@ void initUART2 (uint32_t baud_rate) {
 	//NVIC_EnableIRQ(UART2_IRQn);
 	
 	// Enable Tx and Rx
-	UART2->C2 |= ((UART_C2_TE_MASK) | (UART_C2_RE_MASK));
+	UART2->C2 |= ((UART_C2_TE_MASK) | (UART_C2_RE_MASK)); //	UART->C2[3:2] = 11;
 }
 
 /* UART Transmit Poll */
 void UART2_Transmit_Poll(uint8_t data) {
 	// Wait until transmit data register is full
-	while (!(UART2->S1 & UART_S1_TDRE_MASK)); 
+	while (!(UART2->S1 & UART_S1_TDRE_MASK));	// wait until TDRE == 1
 	UART2->D = data;
 }	
 
 /* UART2 Receive Poll */
 uint8_t UART2_Receive_Poll(void) {
 	// Wait until receive data register is full
-	while (!(UART2->S1 & UART_S1_RDRF_MASK));
+	while (!(UART2->S1 & UART_S1_RDRF_MASK));	// wait until RDRF == 1
 	return (UART2->D);
 }
 

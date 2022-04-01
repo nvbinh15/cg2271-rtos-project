@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controller</title>
+
+    <style>
+        .button {
+            align-items: center;
+            display: inline-block;
+            padding: 3%;
+            margin: .5rem 2% .5rem 2%;
+        }
+
+        .button_arrow {
+            background-color: transparent;
+            height: 2rem;
+            width: 2rem;
+        }
+
+        .button_arrow_up {
+            border-left: 1px solid rgba(0, 0, 0.3);
+            border-top: 1px solid rgba(0, 0, 0.3);
+            transform: translateY(25%) rotate(45deg);
+        }
+
+        .button_arrow_right {
+            border-right: 1px solid rgba(0, 0, 0.3);
+            border-top: 1px solid rgba(0, 0, 0.3);
+            transform: translateX(-25%) rotate(45deg);
+        }
+
+        .button_arrow_down {
+            border-bottom: 1px solid rgba(0, 0, 0.3);
+            border-right: 1px solid rgba(0, 0, 0.3);
+            transform: translateY(-25%) rotate(45deg);
+        }
+
+        .button_arrow_left {
+            border-bottom: 1px solid rgba(0, 0, 0.3);
+            border-left: 1px solid rgba(0, 0, 0.3);
+            transform: translateX(25%) rotate(45deg);
+        }
+
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        div {
+            display: block;
+            margin: 1rem;
+        }
+
+        form {
+            margin: 2rem;
+        }
+
+        .button_auto {
+            margin: 2rem 2rem 0 2rem;
+            padding: 2rem 5rem 2rem 5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <form action="">
+            <label>IP Address: </label>
+            <input type="text" id="ip" name="IP Address" value="172.20.10.4">
+            <input type="submit" id="submit-ip" value="Submit">
+        </form>
+    </div>
+
+
+    <div class="up">
+        <button class="button" onmousedown="forward()" onmouseup="stopForward()">
+            <div class="button_arrow button_arrow_up"></div>
+        </button>
+    </div>
+
+
+    <div class="left-right">
+        <button class="button" onmousedown="left()" onmouseup="stopLeft()">
+            <div class="button_arrow button_arrow_left"></div>
+        </button>
+
+        <button class="button" onclick="stop()">
+            <div class="button_arrow"></div>
+        </button>
+
+        <button class="button" onmousedown="right()" onmouseup="stopRight()">
+            <div class="button_arrow button_arrow_right"></div>
+        </button>
+    </div>
+
+
+    <div class="down">
+        <button class="button" onmousedown="backward()" onmouseup="stopBackward()">
+            <div class="button_arrow button_arrow_down"></div>
+        </button>
+    </div>
+
+    <div>
+
+        <button class="button button_auto" onclick="auto()">
+            Start
+        </button>
+
+        <button class="button button_auto" onclick="finish()">
+            Finish
+        </button>
+    </div>
+
+
+</body>
+
+<script>
+    var ipInput = document.getElementById("ip");
+    var ipAddress = ipInput.value;
+
+    window.onload = function () {
+        if (sessionStorage.getItem("autosave")) {
+            ipInput.value = sessionStorage.getItem("autosave");
+            updateIpAddress();
+        }
+    }
+
+    ipInput.addEventListener("keyup", function () {
+        sessionStorage.setItem("autosave", ipInput.value);
+    });
+
+    function updateIpAddress() {
+        ipAddress = ipInput.value;
+    }
+
+    function forward() {
+        fetch('http://' + ipAddress + '/forward')
+    }
+
+    function backward() {
+        fetch('http://' + ipAddress + '/backward')
+    }
+
+    function left() {
+        fetch('http://' + ipAddress + '/left')
+    }
+
+    function right() {
+        fetch('http://' + ipAddress + '/right')
+    }
+
+    function stop() {
+        fetch('http://' + ipAddress + '/stop')
+    }
+
+    function stopForward() {
+        fetch('http://' + ipAddress + '/stopForward')
+    }
+
+    function stopLeft() {
+        fetch('http://' + ipAddress + '/stopLeft')
+    }
+
+    function stopBackward() {
+        fetch('http://' + ipAddress + '/stopBackward')
+    }
+
+    function stopRight() {
+        fetch('http://' + ipAddress + '/stopRight')
+    }
+
+    document.addEventListener('keydown', function(e) {
+    switch (e.keyCode) {
+        case 37: // left
+            left();
+            break;
+        case 38: // up
+            forward();
+            break;
+        case 39: // right
+            right();
+            break;
+        case 40: // down
+            backward();
+            break;
+        case 8: // space
+            stop();
+            break;
+    }
+    });
+
+    document.addEventListener('keyup', function(e) {
+    switch (e.keyCode) {
+        case 37: // left
+            stopLeft();
+            break;
+        case 38: // up
+            stopForward();
+            break;
+        case 39: // right
+            stopRight();
+            break;
+        case 40: // down
+            stopBackward();
+            break;
+    }
+    });
+
+
+</script>
+
+</html>
