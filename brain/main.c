@@ -9,8 +9,9 @@
 #include "gpio.h"
 #include "uart.h"
 #include "i2c.h"
-#include "sound.h"
+//#include "sound.h"
 #include "motor.h"
+
 /*
 #include "ledCycle.h"
 
@@ -50,6 +51,7 @@ osEventFlagsId_t
 	flagFinish, flagAuto
 ;
 
+/*
 // sensor related callback (50hz)
 static void timerStart(void) {
   osTimerId_t sensorCallbackId;
@@ -64,11 +66,12 @@ static void timerStart(void) {
   }
 }
 
+
 void tTimerStart(void *argument) {
   timerStart();
   for(;;) {}
 }
-
+*/
 
 /* Delay routine */
 void delay(unsigned long delay) {
@@ -170,7 +173,7 @@ void tRunningSound(void *argument) {
 	
 	for (;;) {
 		osEventFlagsWait(flagRunningSound, 0x01, osFlagsWaitAny, osWaitForever);
-		play_running_sound();
+		//play_running_sound();
 	}
 }
 
@@ -237,16 +240,16 @@ int main (void) {
   // System Initialization
   SystemCoreClockUpdate();
 	MotorsInit();
-	initSound();
+	//initSound();
 	offLED();
-	play_running_sound();
+	//play_running_sound();
 	
 	flagForward = osEventFlagsNew(NULL);
 	flagRight = osEventFlagsNew(NULL);
 	flagBackward = osEventFlagsNew(NULL);
 	flagLeft = osEventFlagsNew(NULL);
 	flagStop = osEventFlagsNew(NULL);
-	flagRunningSound = osEventFlagsNew(NULL);
+	//flagRunningSound = osEventFlagsNew(NULL);
 
 	flagTurnRightForward = osEventFlagsNew(NULL);
 	flagTurnLeftForward = osEventFlagsNew(NULL);
@@ -255,8 +258,10 @@ int main (void) {
 	
 	osEventFlagsSet(flagRunningSound, 0x01);
 
+/*
 	flagFinish = osEventFlagsNew(NULL);
 	flagAuto = osEventFlagsNew(NULL);
+*/
 
   UARTInit(UART2, PIN_PAIR_3, 9600, true);
  
