@@ -17,18 +17,6 @@ typedef enum GPIO_state {
 void GPIOInitOutput(PORT_Type* GPIOPort, int GPIOPin);
 void GPIOSetOutput(PORT_Type* GPIOPort, int GPIOPin, GPIO_state_t state);
 
-void initMotor(void);
-void forward(void);
-void backward(void);
-void right(void);
-void left(void);
-void stop(void);
-
-void turnRightForward(void);
-void turnLeftForward(void);
-void turnRightBackward(void);
-void turnLeftBackward(void);
-
 void InitLED(void);
 void offLED(void);
 
