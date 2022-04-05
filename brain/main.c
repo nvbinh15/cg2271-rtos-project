@@ -10,6 +10,24 @@
 #include "uart.h"
 #include "i2c.h"
 #include "sound.h"
+#include "motor.h"
+
+#define DUTY_CYCLE_TURN	50
+
+#define FORWARD 0x30
+#define BACKWARD 0x31
+#define LEFT 0x32
+#define RIGHT 0x33
+#define STOP 0x34
+#define STOP_FORWARD 0x35
+#define STOP_BACKWARD 0x36
+#define STOP_LEFT 0x37
+#define STOP_RIGHT 0x38
+#define RIGHT_FORWARD 0x39
+#define LEFT_FORWARD 0x40
+#define RIGHT_BACKWARD 0x41
+#define LEFT_BACKWARD 0x42
+
  
 void delay (unsigned long delay);
 volatile uint8_t data;
@@ -89,7 +107,7 @@ void tTurnRightForward(void *argument) {
 
 	for (;;) {
 		osEventFlagsWait(flagTurnRightForward, 0x01, osFlagsWaitAny, osWaitForever);
-		turnRightForward();
+		turnRightForward(DUTY_CYCLE_TURN);
 	}
 }
 
@@ -97,7 +115,7 @@ void tTurnRightBackward(void *argument) {
 
 	for (;;) {
 		osEventFlagsWait(flagTurnRightBackWard, 0x01, osFlagsWaitAny, osWaitForever);
-		turnRightBackward();
+		turnRightBackward(DUTY_CYCLE_TURN);
 	}
 }
 
@@ -105,7 +123,7 @@ void tTurnLefttForward(void *argument) {
 
 	for (;;) {
 		osEventFlagsWait(flagTurnLeftForward, 0x01, osFlagsWaitAny, osWaitForever);
-		turnLeftForward();
+		turnLeftForward(DUTY_CYCLE_TURN);
 	}
 }
 
@@ -113,7 +131,7 @@ void tTurnLeftBackward(void *argument) {
 
 	for (;;) {
 		osEventFlagsWait(flagTurnLeftBackward, 0x01, osFlagsWaitAny, osWaitForever);
-		turnLeftBackward();
+		turnLeftBackwardDUTY_CYCLE_TURN();
 	}
 }
 
@@ -136,15 +154,15 @@ void app_main (void *argument) {
   for (;;) {
 		osEventFlagsSet(flagRunningSound, 0x01);
 		
-		if (data == 0x30) { // forward
+		if (data == FORWARD) { // forward
 			osEventFlagsSet(flagForward, 0x01);
-		} else if (data == 0x31) { // backward
+		} else if (data == BACKWARD) { // backward
 			osEventFlagsSet(flagBackward, 0x01);
-		} else if (data == 0x32) { // left
+		} else if (data == LEFT) { // left
 			osEventFlagsSet(flagLeft, 0x01);
-		} else if (data == 0x33) { // right
+		} else if (data == RIGHT) { // right
 			osEventFlagsSet(flagRight, 0x01);
-		} else if (data == 0x34) { // stop
+		} else if (data == STOP) { // stop
 			
 			osEventFlagsClear(flagForward, 0x01);
 			osEventFlagsClear(flagBackward, 0x01);
@@ -158,21 +176,21 @@ void app_main (void *argument) {
 		
 			osEventFlagsSet(flagStop, 0x01);
 			
-		} else if (data == 0x35) {
+		} else if (data == STOP_FORWARD) {
 			osEventFlagsClear(flagForward, 0x01);
-		} else if (data == 0x36) {
+		} else if (data == STOP_BACKWARD) {
 			osEventFlagsClear(flagBackward, 0x01);
-		} else if (data == 0x37) {
+		} else if (data == STOP_LEFT) {
 			osEventFlagsClear(flagLeft, 0x01);
-		} else if (data == 0x38) {
+		} else if (data == STOP_RIGHT) {
 			osEventFlagsClear(flagRight, 0x01);
-		} else if (data == 0x39) {
+		} else if (data == RIGHT_FORWARD) {
 			osEventFlagsSet(flagTurnRightForward, 0x01);
-		} else if (data == 0x40) {
+		} else if (data == LEFT_FORWARD) {
 			osEventFlagsSet(flagTurnLeftForward, 0x01);
-		} else if (data == 0x41) {
+		} else if (data == RIGHT_BACKWARD) {
 			osEventFlagsSet(flagTurnRightBackWard, 0x01);
-		} else if (data == 0x42) {
+		} else if (data == LEFT_BACKWARD) {
 			osEventFlagsSet(flagTurnLeftBackward, 0x01);
 		}
 		

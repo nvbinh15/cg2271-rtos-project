@@ -4,6 +4,20 @@
 #define RXD2 16
 #define TXD2 17
 
+#define FORWARD 0x30
+#define BACKWARD 0x31
+#define LEFT 0x32
+#define RIGHT 0x33
+#define STOP 0x34
+#define STOP_FORWARD 0x35
+#define STOP_BACKWARD 0x36
+#define STOP_LEFT 0x37
+#define STOP_RIGHT 0x38
+#define RIGHT_FORWARD 0x39
+#define LEFT_FORWARD 0x40
+#define RIGHT_BACKWARD 0x41
+#define LEFT_BACKWARD 0x42
+
 // Replace with your network credentials
 const char* ssid = "binh";
 const char* password = "12345678";
@@ -89,55 +103,55 @@ void loop() {
   }
 
   if(req.indexOf("forward") != -1) {
-    Serial2.write(0x30);
+    Serial2.write(FORWARD);
   }
 
   if(req.indexOf("backward") != -1) {
-    Serial2.write(0x31);
+    Serial2.write(BACKWARD);
   }  
 
   if(req.indexOf("left") != -1) {
-    Serial2.write(0x32);
+    Serial2.write(LEFT);
   }
 
   if(req.indexOf("right") != -1) {
-    Serial2.write(0x33);
+    Serial2.write(RIGHT);
   }
 
   if(req.indexOf("stop") != -1) {
-    Serial2.write(0x34);
+    Serial2.write(STOP);
   }
 
   if(req.indexOf("stopForward") != -1) {
-    Serial2.write(0x35);
+    Serial2.write(STOP_FORWARD);
   }
 
   if(req.indexOf("stopBackward") != -1) {
-    Serial2.write(0x36);
+    Serial2.write(STOP_BACKWARD);
   }
 
   if(req.indexOf("stopLeft") != -1) {
-    Serial2.write(0x37);
+    Serial2.write(STOP_LEFT);
   }
 
   if(req.indexOf("stopRight") != -1) {
-    Serial2.write(0x38);
+    Serial2.write(STOP_RIGHT);
   }
 
   if(req.indexOf("turnRightForward") != -1) {
-    Serial2.write(0x39);
+    Serial2.write(RIGHT_FORWARD);
   }
 
   if(req.indexOf("turnLeftForward") != -1) {
-    Serial2.write(0x40);
+    Serial2.write(LEFT_FORWARD);
   }
 
   if(req.indexOf("turnRightBackward") != -1) {
-    Serial2.write(0x41);
+    Serial2.write(RIGHT_BACKWARD);
   }
 
   if(req.indexOf("turnLeftBackward") != -1) {
-    Serial2.write(0x42);
+    Serial2.write(LEFT_BACKWARD);
   }
 
   client.println("HTTP/1.1 200 OK");
