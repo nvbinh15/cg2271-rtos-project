@@ -1,7 +1,6 @@
 #include "MKL25Z4.h"
 #include "sound.h"
 #include "cmsis_os2.h"
-#include "common.h"
 
 
 int ending_song[] = { // happy birthday
@@ -17,22 +16,8 @@ int ending_song[] = { // happy birthday
   NOTE_F4
 };
 
-int running_song[] = {
-	NOTE_FS5, NOTE_FS5,NOTE_D5, NOTE_B4, REST, NOTE_B4, REST, NOTE_E5, 
-  REST, NOTE_E5, REST, NOTE_E5, NOTE_GS5, NOTE_GS5, NOTE_A5, NOTE_B5,
-  NOTE_A5, NOTE_A5, NOTE_A5, NOTE_E5, REST, NOTE_D5, REST, NOTE_FS5, 
-  REST, NOTE_FS5, REST, NOTE_FS5, NOTE_E5, NOTE_E5, NOTE_FS5, NOTE_E5,
-  NOTE_FS5, NOTE_FS5,NOTE_D5, NOTE_B4, REST, NOTE_B4, REST, NOTE_E5, 
-  
-  REST, NOTE_E5, REST, NOTE_E5, NOTE_GS5, NOTE_GS5, NOTE_A5, NOTE_B5,
-  NOTE_A5, NOTE_A5, NOTE_A5, NOTE_E5, REST, NOTE_D5, REST, NOTE_FS5, 
-  REST, NOTE_FS5, REST, NOTE_FS5, NOTE_E5, NOTE_E5, NOTE_FS5, NOTE_E5,
-  NOTE_FS5, NOTE_FS5,NOTE_D5, NOTE_B4, REST, NOTE_B4, REST, NOTE_E5, 
-  REST, NOTE_E5, REST, NOTE_E5, NOTE_GS5, NOTE_GS5, NOTE_A5, NOTE_B5,
-  
-  NOTE_A5, NOTE_A5, NOTE_A5, NOTE_E5, REST, NOTE_D5, REST, NOTE_FS5, 
-  REST, NOTE_FS5, REST, NOTE_FS5, NOTE_E5, NOTE_E5, NOTE_FS5, NOTE_E5
-};
+
+
 
 
 /* Initialize PWM module */
@@ -64,17 +49,17 @@ void initSound(void) {
 }
 
 
-void play_running_sound(void) {
+// void play_running_sound(void) {
 	
-		for (int i = 0; i < RUNNING_SOUND_LEN && r_sound == 0; i++) {
-			if (running_song[i] != 0) {
-				TPM0->MOD = 375000 / running_song[i];
-				TPM0_C3V =  375000 / running_song[i] / 10;
-			}
-			osDelay(200);
-		}
+// 		for (int i = 0; i < RUNNING_SOUND_LEN && r_sound == 0; i++) {
+// 			if (running_song[i] != 0) {
+// 				TPM0->MOD = 375000 / running_song[i];
+// 				TPM0_C3V =  375000 / running_song[i] / 10;
+// 			}
+// 			osDelay(200);
+// 		}
 
-}
+// }
 
 void play_ending_sound(void) {
 	

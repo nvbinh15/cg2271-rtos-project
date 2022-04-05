@@ -13,20 +13,18 @@
 #include "motor.h"
 #include "ledCycle.h"
 // sensors related files
-// #include "mpu6050.h"
-// #include "sonar.h"
-// #include "sensors.h"
-// #include "autorun.h"
+#include "mpu6050.h"
+#include "sonar.h"
+#include "sensors.h"
+#include "autorun.h"
 #include "common.h"
 
-volatile int r_sound;
+
 
 osEventFlagsId_t 
-	flagForward, flagBackward, flagRight, flagLeft, flagStop,
 	flagRunningSound, flagEndingSound, 
-	flagTurnRightForward, flagTurnLeftForward, flagTurnRightBackWard, flagTurnLeftBackward,
 	flagFinish, flagAuto,
-	flagRunningLed, flagStationLed
+	flagRunning, flagStation
 ;
 
 void delay (unsigned long delay);
@@ -71,9 +69,15 @@ void UART2_IRQHandler(void) {
 void tRunningSound(void *argument) {
 	
 	for (;;) {
-		osEventFlagsWait(flagRunningSound, 0x01, osFlagsWaitAny, osWaitForever);
-		//play_running_sound();
 		
+		for (int i = 0; i < RUNNING_SOUND_LEN; i++) {
+			osEventFlagsWait(flagRunningSound, 0x01, osFlagsNoClear, osWaitForever);
+			if (running_song[i] != 0) {
+				TPM0->MOD = 375000 / running_song[i];
+				TPM0_C3V =  375000 / running_song[i] / 10;
+			}
+			osDelay(200);
+		}
 	}
 }
 
@@ -85,16 +89,6 @@ void tEndingSound(void *argument) {
 	}
 }
 
-void clearFlags(void) {
-	osEventFlagsClear(flagForward, 0x01);
-	osEventFlagsClear(flagBackward, 0x01);
-	osEventFlagsClear(flagRight, 0x01);
-	osEventFlagsClear(flagLeft, 0x01);
-	osEventFlagsClear(flagTurnRightForward, 0x01);
-	osEventFlagsClear(flagTurnLeftForward, 0x01);
-	osEventFlagsClear(flagTurnRightBackWard, 0x01);
-	osEventFlagsClear(flagTurnLeftBackward, 0x01);
-}
 
 /*----------------------------------------------------------------------------
  * Application main thread
@@ -103,52 +97,50 @@ void app_main (void *argument) {
  
   // ...
 	osEventFlagsSet(flagRunningSound, 0x01);
-	r_sound = 0;
   for (;;) {
 		
 		
 		if (data == FORWARD) {
-
+			osEventFlagsSet(flagRunning, 0x01);
+			osEventFlagsClear(flagStation, 0x01);
 			forward();
 		} else if (data == BACKWARD) {
-
+			osEventFlagsSet(flagRunning, 0x01);
+			osEventFlagsClear(flagStation, 0x01);
 			backward();
 		} else if (data == LEFT) { 
-
+			osEventFlagsSet(flagRunning, 0x01);
+			osEventFlagsClear(flagStation, 0x01);
 			left();
 		} else if (data == RIGHT) {
-
+			osEventFlagsSet(flagRunning, 0x01);
+			osEventFlagsClear(flagStation, 0x01);
 			right();
 		} else if (data == STOP) {
-			clearFlags();
+			osEventFlagsSet(flagStation, 0x01);
+			osEventFlagsClear(flagRunning, 0x01);
 			stop();
 		} else if (data == RIGHT_FORWARD) {
-
+			osEventFlagsSet(flagRunning, 0x01);
+			osEventFlagsClear(flagStation, 0x01);
 			turnRightForward(DUTY_CYCLE_TURN);
 		} else if (data == LEFT_FORWARD) {
-
+			osEventFlagsSet(flagRunning, 0x01);
+			osEventFlagsClear(flagStation, 0x01);
 			turnLeftForward(DUTY_CYCLE_TURN);
 		} else if (data == RIGHT_BACKWARD) {
+			osEventFlagsSet(flagRunning, 0x01);
+			osEventFlagsClear(flagStation, 0x01);
 			turnRightBackward(DUTY_CYCLE_TURN);
 		} else if (data == LEFT_BACKWARD) {
+			osEventFlagsSet(flagRunning, 0x01);
+			osEventFlagsClear(flagStation, 0x01);
 			turnLeftBackward(DUTY_CYCLE_TURN);
 		} else if (data == FINISH) {
-			r_sound = 1;
 			osEventFlagsClear(flagRunningSound, 0x01);
 			osEventFlagsSet(flagEndingSound, 0x01);
 		}
 		
-		if (osEventFlagsGet(flagForward) || osEventFlagsGet(flagBackward) || osEventFlagsGet(flagRight) ||
-			osEventFlagsGet(flagLeft) || osEventFlagsGet(flagTurnLeftBackward) || osEventFlagsGet(flagTurnLeftForward) ||
-			osEventFlagsGet(flagTurnRightBackWard) || osEventFlagsGet(flagTurnRightForward)) {
-				
-			osEventFlagsSet(flagRunningLed, 0x01);
-			osEventFlagsClear(flagStationLed, 0x01);	
-
-		} else {
-			osEventFlagsSet(flagStationLed, 0x01);
-			osEventFlagsClear(flagRunningLed, 0x01);		
-		}
 	}
 }
 
@@ -158,39 +150,25 @@ int main (void) {
   SystemCoreClockUpdate();
 	MotorsInit();
 	initSound();
-
 	offLED();
-	
-	
-//   I2C0Init();
-//   delay(0x8000);
-//   InitMPU6050();
-//   initSonar();
-// 	GPIOInitOutput(PORTD, 1);
-  
-//   calibrateMPU6050();
-//   initYawAngle();
-	
-	
-	flagForward = osEventFlagsNew(NULL);
-	flagRight = osEventFlagsNew(NULL);
-	flagBackward = osEventFlagsNew(NULL);
-	flagLeft = osEventFlagsNew(NULL);
-	flagStop = osEventFlagsNew(NULL);
 
-	flagTurnRightForward = osEventFlagsNew(NULL);
-	flagTurnLeftForward = osEventFlagsNew(NULL);
-	flagTurnRightBackWard = osEventFlagsNew(NULL);
-	flagTurnLeftBackward = osEventFlagsNew(NULL);
-
+  I2C0Init();
+  delay(0x8000);
+  InitMPU6050();
+  initSonar();
+	GPIOInitOutput(PORTD, 1);
+  calibrateMPU6050();
+  initYawAngle();
+	
+	
 	flagEndingSound = osEventFlagsNew(NULL);
 	flagRunningSound = osEventFlagsNew(NULL);
 
 	flagFinish = osEventFlagsNew(NULL);
 	flagAuto = osEventFlagsNew(NULL);
 	
-	flagStationLed = osEventFlagsNew(NULL);
-	flagRunningLed = osEventFlagsNew(NULL);
+	flagStation = osEventFlagsNew(NULL);
+	flagRunning = osEventFlagsNew(NULL);
 
   UARTInit(UART2, PIN_PAIR_3, 9600, true);
  
@@ -205,7 +183,6 @@ int main (void) {
 	osThreadNew(tRunningSound, NULL, NULL);
 	osThreadNew(tEndingSound, NULL, NULL);
 	
-
   osKernelStart();                      // Start thread execution
   for (;;) {}
 }
