@@ -445,11 +445,11 @@ rK6, BackDoorK7
   268 00000000                 IMPORT           __main
   269 00000000         
   270 00000000 B672            CPSID            I           ; Mask interrupts
-  271 00000002 4809            LDR              R0, =SystemInit
+  271 00000002 4806            LDR              R0, =SystemInit
   272 00000004 4780            BLX              R0
   273 00000006 B662            CPSIE            i           ; Unmask interrupts
                                                             
-  274 00000008 4808            LDR              R0, =__main
+  274 00000008 4805            LDR              R0, =__main
   275 0000000A 4700            BX               R0
   276 0000000C                 ENDP
   277 0000000C         
@@ -568,7 +568,7 @@ WEAK]
   370 00000016         PORTA_IRQHandler
   371 00000016         PORTD_IRQHandler
   372 00000016         DefaultISR
-  373 00000016 4806            LDR              R0, =DefaultISR
+  373 00000016 4803            LDR              R0, =DefaultISR
   374 00000018 4700            BX               R0
   375 0000001A                 ENDP
   376 0000001A 00 00           ALIGN
@@ -577,45 +577,35 @@ WEAK]
   379 0000001C         ; User Initial Stack & Heap
   380 0000001C         
   381 0000001C                 IF               :DEF:__MICROLIB
-  388 0000001C         
-  389 0000001C                 IMPORT           __use_two_region_memory
-  390 0000001C                 EXPORT           __user_initial_stackheap
-  391 0000001C         __user_initial_stackheap
-  392 0000001C         
-  393 0000001C 4805            LDR              R0, =  Heap_Mem
+  382 0000001C         
+  383 0000001C                 EXPORT           __initial_sp
+  384 0000001C                 EXPORT           __heap_base
+  385 0000001C                 EXPORT           __heap_limit
+  386 0000001C         
+  387 0000001C                 ELSE
 
 
 
 ARM Macro Assembler    Page 10 
 
 
-  394 0000001E 4906            LDR              R1, =(Stack_Mem + Stack_Size)
-  395 00000020 4A04            LDR              R2, = (Heap_Mem +  Heap_Size)
-  396 00000022 4B06            LDR              R3, = Stack_Mem
-  397 00000024 4770            BX               LR
-  398 00000026         
-  399 00000026 00 00           ALIGN
-  400 00000028         
-  401 00000028                 ENDIF
-  402 00000028         
-  403 00000028         
-  404 00000028                 END
+  401                          ENDIF
+  402 0000001C         
+  403 0000001C         
+  404 0000001C                 END
               00000000 
               00000000 
-              00000000 
-              00000000 
-              00000100 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
 work --depend=.\objects\startup_mkl25z4.d -o.\objects\startup_mkl25z4.o -I.\RTE
-\CMSIS -I.\RTE\Device\MKL25Z128xxx4 -I.\RTE\_Target_1 -I"C:\Users\Van Binh\AppD
-ata\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include" -I"C:\Users\Van Binh\Ap
-pData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include" -I"C:\Users\Van Binh
-\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include" -I"C:\Users\V
-an Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include" --
-predefine="__RTX SETA 1" --predefine="__EVAL SETA 1" --predefine="__UVISION_VER
-SION SETA 529" --predefine="_RTE_ SETA 1" --predefine="MKL25Z128xxx4 SETA 1" --
-list=.\listings\startup_mkl25z4.lst RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
+\CMSIS -I.\RTE\Device\MKL25Z128xxx4 -I.\RTE\_Target_1 -I"E:\Keil uVision\ARM\CM
+SIS\5.6.0\CMSIS\Core\Include" -I"E:\Keil uVision\ARM\CMSIS\5.6.0\CMSIS\RTOS2\In
+clude" -I"E:\Keil uVision\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include" -I"E:\Keil u
+Vision\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include" --predefine="__RTX SETA 1" 
+--predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" --predefine="__UVIS
+ION_VERSION SETA 534" --predefine="_RTE_ SETA 1" --predefine="MKL25Z128xxx4 SET
+A 1" --predefine="_RTE_ SETA 1" --list=.\listings\startup_mkl25z4.lst RTE\Devic
+e\MKL25Z128xxx4\startup_MKL25Z4.s
 
 
 
@@ -636,9 +626,8 @@ Symbol: Stack_Mem
    Definitions
       At line 50 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
    Uses
-      At line 394 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-      At line 396 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-
+      None
+Comment: Stack_Mem unused
 __initial_sp 00000100
 
 Symbol: __initial_sp
@@ -646,7 +635,8 @@ Symbol: __initial_sp
       At line 51 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
    Uses
       At line 77 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-Comment: __initial_sp used once
+      At line 383 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
+
 3 symbols
 
 
@@ -668,25 +658,24 @@ Symbol: Heap_Mem
    Definitions
       At line 62 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
    Uses
-      At line 393 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-      At line 395 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-
+      None
+Comment: Heap_Mem unused
 __heap_base 00000000
 
 Symbol: __heap_base
    Definitions
       At line 61 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
    Uses
-      None
-Comment: __heap_base unused
+      At line 384 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
+Comment: __heap_base used once
 __heap_limit 00000000
 
 Symbol: __heap_limit
    Definitions
       At line 63 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
    Uses
-      None
-Comment: __heap_limit unused
+      At line 385 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
+Comment: __heap_limit used once
 4 symbols
 
 
@@ -1145,15 +1134,7 @@ Symbol: USB0_IRQHandler
       At line 119 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
       At line 331 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
 
-__user_initial_stackheap 0000001C
-
-Symbol: __user_initial_stackheap
-   Definitions
-      At line 391 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-   Uses
-      At line 390 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-Comment: __user_initial_stackheap used once
-42 symbols
+41 symbols
 
 
 
@@ -1291,8 +1272,7 @@ ARM Macro Assembler    Page 3 Alphabetic symbol ordering
 Absolute symbols
 
       At line 62 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-      At line 395 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-
+Comment: Heap_Size used once
 Stack_Size 00000100
 
 Symbol: Stack_Size
@@ -1300,8 +1280,7 @@ Symbol: Stack_Size
       At line 47 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
    Uses
       At line 50 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-      At line 394 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-
+Comment: Stack_Size used once
 __Vectors_Size 000000C0
 
 Symbol: __Vectors_Size
@@ -1365,13 +1344,5 @@ Symbol: __main
    Uses
       At line 274 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
 Comment: __main used once
-__use_two_region_memory 00000000
-
-Symbol: __use_two_region_memory
-   Definitions
-      At line 389 in file RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
-   Uses
-      None
-Comment: __use_two_region_memory unused
-3 symbols
-418 symbols in table
+2 symbols
+415 symbols in table
