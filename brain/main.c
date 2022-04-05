@@ -11,6 +11,12 @@
 #include "i2c.h"
 #include "sound.h"
 #include "motor.h"
+
+// sensors related files
+#include "mpu6050.h"
+#include "sonar.h"
+#include "sensors.h"
+#include "autorun.h"
  
 void delay (unsigned long delay);
 volatile uint8_t data;
@@ -156,6 +162,9 @@ void app_main (void *argument) {
 			osEventFlagsClear(flagTurnLeftForward, 0x01);
 			osEventFlagsClear(flagTurnRightBackWard, 0x01);
 			osEventFlagsClear(flagTurnLeftBackward, 0x01);
+      
+      // auto run related
+      osEventFlagsClear(flagAutoRun, 0x01);
 		
 			osEventFlagsSet(flagStop, 0x01);
 			
@@ -175,10 +184,31 @@ void app_main (void *argument) {
 			osEventFlagsSet(flagTurnRightBackWard, 0x01);
 		} else if (data == 0x42) {
 			osEventFlagsSet(flagTurnLeftBackward, 0x01);
-		}
+		} else if (data == 0x43) {  // auto run
+      osEventFlagsSet(flagAutoRun, 0x01);
+    }
 		
 
 	}
+}
+
+// sensor related callback (50hz)
+static void timerStart(void) {
+  osTimerId_t sensorCallbackId;
+  
+  if (sensorCallbackId != NULL) {
+    osStatus_t timerStatus = osTimerStart(sensorCallbackId, 20U);
+    
+    if (timerStatus != osOK) {
+      GPIOSetOutput(PORTB, 19, LOW);
+      UARTTransmit(UART2, '!');
+    }
+  }
+}
+
+void tTimerStart(void *argument) {
+  timerStart();
+  for(;;) {}
 }
 
 int main (void) {
@@ -200,8 +230,18 @@ int main (void) {
 	flagTurnLeftForward = osEventFlagsNew(NULL);
 	flagTurnRightBackWard = osEventFlagsNew(NULL);
 	flagTurnLeftBackward = osEventFlagsNew(NULL);
+  
+  // auto run flag
+  flagAutoRun = osEventFlagsNew(NULL);
 
   UARTInit(UART2, PIN_PAIR_3, 9600, true);
+  I2C0Init();
+  delay(0x80000);
+  InitMPU6050();
+  initSonar();
+  
+  calibrateMPU6050();
+  initYawAngle();
  
   osKernelInitialize();                 // Initialize CMSIS-RTOS
   osThreadNew(app_main, NULL, NULL);    // Create application main thread
@@ -218,6 +258,11 @@ int main (void) {
 	osThreadNew(tTurnLeftBackward, NULL, NULL);
 	
 	osThreadNew(tRunningSound, NULL, NULL);
+  
+  // auto run related
+  osThreadNew(tTimerStart, NULL, NULL);
+  osThreadNew(tAutoRun, NULL, NULL);
+  
 	
   osKernelStart();                      // Start thread execution
   for (;;) {}
