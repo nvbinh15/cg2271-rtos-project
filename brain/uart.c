@@ -51,7 +51,7 @@ void UARTInit(UART_Type* UART, UART_pin_pair_t pin_pair, unsigned long baudrate,
       UART1->C2 |= (UART_C2_TE_MASK) | (UART_C2_RE_MASK);
     }
     else {
-      NVIC_SetPriority(UART1_IRQn, 128);
+      NVIC_SetPriority(UART1_IRQn, 1);
       NVIC_ClearPendingIRQ(UART1_IRQn);
       NVIC_EnableIRQ(UART1_IRQn);
       
@@ -109,7 +109,7 @@ void UARTInit(UART_Type* UART, UART_pin_pair_t pin_pair, unsigned long baudrate,
     }
     
     else {
-      NVIC_SetPriority(UART2_IRQn, 128);
+      NVIC_SetPriority(UART2_IRQn, 1);
       NVIC_ClearPendingIRQ(UART2_IRQn);
       NVIC_EnableIRQ(UART2_IRQn);
       
@@ -121,5 +121,29 @@ void UARTInit(UART_Type* UART, UART_pin_pair_t pin_pair, unsigned long baudrate,
 void UARTTransmit(UART_Type* UART, uint8_t data) {
   while(!(UART->S1 & UART_S1_TDRE_MASK));
   UART->D = data;
+}
+
+void UARTWriteInt(UART_Type* UART, int num) {
+  if (num < 0) {
+      UARTTransmit(UART, '-');
+  }
+  
+  //UARTTransmit(UART, abs(num)/1000 + '0');
+  UARTTransmit(UART, (abs(num)/100)%10 + '0');
+  UARTTransmit(UART, (abs(num)/10)%10 + '0');
+  UARTTransmit(UART, (abs(num))%10 + '0');
+}
+
+void UARTWriteFloat(UART_Type* UART, float num) {
+  if (num < 0) {
+      UARTTransmit(UART, '-');
+  }
+  
+  num = num * 10;
+  UARTTransmit(UART, abs(num)/1000 + '0');
+  UARTTransmit(UART, (abs(num)/100)%10 + '0');
+  UARTTransmit(UART, (abs(num)/10)%10 + '0');
+  UARTTransmit(UART, '.');
+  UARTTransmit(UART, (abs(num))%10 + '0');
 }
 
