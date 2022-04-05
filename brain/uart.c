@@ -2,7 +2,6 @@
 #include "uart.h"
 #include <stdbool.h>
 
-
 /**
   * Initialize the UART port with the baud rate.
   * 

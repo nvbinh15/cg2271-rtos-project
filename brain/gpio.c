@@ -1,7 +1,6 @@
 #include "gpio.h"
 #include "MKL25Z4.h"
 
-
 void GPIOInitOutput(PORT_Type* GPIOPort, int GPIOPin) {
   GPIO_Type* GPIO;
   

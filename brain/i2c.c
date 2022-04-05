@@ -1,7 +1,6 @@
 #include "i2c.h"
 #include "MKL25Z4.h"
 
-
 void I2CDelay(uint32_t t) {
   uint32_t cnt = 0;
   for (cnt = 0; cnt < t; cnt++) {

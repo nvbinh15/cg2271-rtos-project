@@ -227,7 +227,7 @@ void tAutoRun(void *argument) {
     curr_state = START;
     next_state = START;
     
-    while (curr_state != STOP) {
+    while (curr_state != STOPA) {
       // fsm 
       if (curr_state == START) {
         currTime = osKernelGetTickCount();
@@ -356,7 +356,7 @@ void tAutoRun(void *argument) {
           leftMove(FOWARD, 95 - gyro_yaw_input);
           rightMove(FOWARD, 95 + gyro_yaw_input);
         }
-        next_state = STOP;
+        next_state = STOPA;
       }
       
       curr_state = next_state;

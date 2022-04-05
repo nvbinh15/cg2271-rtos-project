@@ -125,7 +125,7 @@ void loop() {
   if(req.indexOf("stop") != -1) {
     Serial2.write(STOP);
   }
-
+/*
   if(req.indexOf("stopForward") != -1) {
     Serial2.write(STOP_FORWARD);
   }
@@ -141,6 +141,7 @@ void loop() {
   if(req.indexOf("stopRight") != -1) {
     Serial2.write(STOP_RIGHT);
   }
+*/
 
   if(req.indexOf("turnRightForward") != -1) {
     Serial2.write(RIGHT_FORWARD);

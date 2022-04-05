@@ -95,7 +95,8 @@
 #define PTE30_PIN	30
 
 #define ENDING_SOUND_LEN 25
-#define RUNNING_SOUNT_LEN 96
+#define RUNNING_SOUND_LEN 96
+
 
 void play_running_sound(void);
 void play_ending_sound(void);

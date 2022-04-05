@@ -20,7 +20,7 @@ typedef enum autorun_states {
   START,
   TURN, 
   END,
-  STOP
+  STOPA
 } autorun_states_t;
 
 typedef enum turning_states {

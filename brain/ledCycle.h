@@ -1,6 +1,9 @@
+#ifndef _LED_CYCLE_
+#define _LED_CYCLE_
+
 #include "cmsis_os2.h"
 #include "gpio.h"
-
+#include "common.h"
 
 /**
   * Use cases: (all these functions return ids and allocate memory to the threads)
@@ -87,6 +90,7 @@ void ledRun1(void* argument) {
 	//construct list of nodes
 	ledArrayNode nodeArray[10] = {node0, node1, node2, node3, node4, node5, node6, node7, node8, node9};
 		for (;;) {
+			osEventFlagsWait(flagRunningLed, 0x01, osFlagsWaitAny, osWaitForever);
 			for (int x = 0; x < 10; ++x) {
 				pulse(nodeArray[x]);
 			}
@@ -109,37 +113,39 @@ void flashLed(ledArrayNode* arr, uint32_t delay) {
 }
 
 void ledFlash500(void *argument) {
-	ledArrayNode node0 = initNode(5, PORTA);	//A1
-	ledArrayNode node1 = initNode(6, PORTC);	//A2
-	ledArrayNode node4 = initNode(4, PORTA);
-	ledArrayNode node3 = initNode(12, PORTA);
-	ledArrayNode node8 = initNode(0, PORTC);
-	ledArrayNode node7 = initNode(3, PORTC);
-	ledArrayNode node6 = initNode(4, PORTC);
-	ledArrayNode node5 = initNode(5, PORTC);
-	ledArrayNode node9 = initNode(7, PORTC);
-	ledArrayNode node2 = initNode(4, PORTD);
+	ledArrayNode node0 = initNode(21, PORTE);
+	ledArrayNode node1 = initNode(20, PORTE);
+	ledArrayNode node2 = initNode(5, PORTE);
+	ledArrayNode node3 = initNode(4, PORTE);
+	ledArrayNode node4 = initNode(3, PORTE);
+	ledArrayNode node5 = initNode(2, PORTE);
+	ledArrayNode node6 = initNode(11, PORTB);
+	ledArrayNode node7 = initNode(10, PORTB);
+	ledArrayNode node8 = initNode(9, PORTB);
+	ledArrayNode node9 = initNode(8, PORTB);
 	//construct list of nodes
 	ledArrayNode nodeArray[10] = {node0, node1, node2, node3, node4, node5, node6, node7, node8, node9};
 	for (;;) {
+		osEventFlagsWait(flagRunningLed, 0x01, osFlagsWaitAny, osWaitForever);
 		flashLed(nodeArray, 500);
 	}
 }
 
 void ledFlash250(void *argument) {
-	ledArrayNode node0 = initNode(5, PORTA);	//A1
-	ledArrayNode node1 = initNode(6, PORTC);	//A2
-	ledArrayNode node4 = initNode(4, PORTA);
-	ledArrayNode node3 = initNode(12, PORTA);
-	ledArrayNode node8 = initNode(0, PORTC);
-	ledArrayNode node7 = initNode(3, PORTC);
-	ledArrayNode node6 = initNode(4, PORTC);
-	ledArrayNode node5 = initNode(5, PORTC);
-	ledArrayNode node9 = initNode(7, PORTC);
-	ledArrayNode node2 = initNode(4, PORTD);
+	ledArrayNode node0 = initNode(21, PORTE);
+	ledArrayNode node1 = initNode(20, PORTE);
+	ledArrayNode node2 = initNode(5, PORTE);
+	ledArrayNode node3 = initNode(4, PORTE);
+	ledArrayNode node4 = initNode(3, PORTE);
+	ledArrayNode node5 = initNode(2, PORTE);
+	ledArrayNode node6 = initNode(11, PORTB);
+	ledArrayNode node7 = initNode(10, PORTB);
+	ledArrayNode node8 = initNode(9, PORTB);
+	ledArrayNode node9 = initNode(8, PORTB);
 	//construct list of nodes
 	ledArrayNode nodeArray[10] = {node0, node1, node2, node3, node4, node5, node6, node7, node8, node9};
 	for (;;) {
+		osEventFlagsWait(flagStationLed, 0x01, osFlagsWaitAny, osWaitForever);
 		flashLed(nodeArray, 250);
 	}
 }
@@ -166,8 +172,9 @@ void onALLLED(void *argument) {
 
 	//leave output on
 	for (;;) {
+		osEventFlagsWait(flagStationLed, 0x01, osFlagsWaitAny, osWaitForever);
 		onLED(nodeArray);
-		osDelay(1000);
+		osDelay(2000);
 	}
 
 }
@@ -190,3 +197,5 @@ osThreadId_t runLedFlash200Thread(void) {
 osThreadId_t turnOnLed(void) {
 	return osThreadNew(onALLLED, NULL, &ledon_attr);
 }
+
+#endif 

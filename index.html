@@ -306,12 +306,13 @@
             d = 1;
             u = 0;
             break;
-        case 8: // space
+        case 32: // space
+            stop();
             l = u = r = d = 0;
             break;
     }
 
-    if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 8) {
+    if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 32) {
         check();
     }
     });
@@ -330,11 +331,12 @@
         case 40: // down
             d = 0;
             break;
-        case 8: 
+        case 32: 
+            stop();
             l = u = r = d = 0;
     }
 
-    if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 8) {
+    if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 32) {
         check();
     }
     });
