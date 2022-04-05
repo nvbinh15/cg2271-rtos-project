@@ -9,10 +9,10 @@
 #include "gpio.h"
 #include "uart.h"
 #include "i2c.h"
-//#include "sound.h"
+#include "sound.h"
 #include "motor.h"
 
-/*
+
 #include "ledCycle.h"
 
 // sensors related files
@@ -20,9 +20,9 @@
 #include "sonar.h"
 #include "sensors.h"
 #include "autorun.h"
-*/
 
-#define DUTY_CYCLE_TURN	50
+
+#define DUTY_CYCLE_TURN	30
 
 #define FORWARD						0x30
 #define BACKWARD 					0x31
@@ -51,7 +51,6 @@ osEventFlagsId_t
 	flagFinish, flagAuto
 ;
 
-/*
 // sensor related callback (50hz)
 static void timerStart(void) {
   osTimerId_t sensorCallbackId;
@@ -71,7 +70,7 @@ void tTimerStart(void *argument) {
   timerStart();
   for(;;) {}
 }
-*/
+
 
 /* Delay routine */
 void delay(unsigned long delay) {
@@ -130,8 +129,6 @@ void tStop(void *argument) {
 	
 	for (;;) {
 		osEventFlagsWait(flagStop, 0x01, osFlagsWaitAny, osWaitForever);
-		
-
 		stop();
 	}
 	
@@ -172,10 +169,11 @@ void tTurnLeftBackward(void *argument) {
 void tRunningSound(void *argument) {
 	
 	for (;;) {
-		osEventFlagsWait(flagRunningSound, 0x01, osFlagsWaitAny, osWaitForever);
-		//play_running_sound();
+		//osEventFlagsWait(flagRunningSound, 0x01, osFlagsWaitAny, osWaitForever);
+		play_running_sound();
 	}
 }
+
 
 
 /*----------------------------------------------------------------------------
@@ -240,28 +238,35 @@ int main (void) {
   // System Initialization
   SystemCoreClockUpdate();
 	MotorsInit();
-	//initSound();
+	initSound();
+
 	offLED();
-	//play_running_sound();
+	
+	
+  I2C0Init();
+  delay(0x8000);
+  InitMPU6050();
+  initSonar();
+	GPIOInitOutput(PORTD, 1);
+  
+  calibrateMPU6050();
+  initYawAngle();
+	
 	
 	flagForward = osEventFlagsNew(NULL);
 	flagRight = osEventFlagsNew(NULL);
 	flagBackward = osEventFlagsNew(NULL);
 	flagLeft = osEventFlagsNew(NULL);
 	flagStop = osEventFlagsNew(NULL);
-	//flagRunningSound = osEventFlagsNew(NULL);
+	flagRunningSound = osEventFlagsNew(NULL);
 
 	flagTurnRightForward = osEventFlagsNew(NULL);
 	flagTurnLeftForward = osEventFlagsNew(NULL);
 	flagTurnRightBackWard = osEventFlagsNew(NULL);
 	flagTurnLeftBackward = osEventFlagsNew(NULL);
-	
-	osEventFlagsSet(flagRunningSound, 0x01);
 
-/*
 	flagFinish = osEventFlagsNew(NULL);
 	flagAuto = osEventFlagsNew(NULL);
-*/
 
   UARTInit(UART2, PIN_PAIR_3, 9600, true);
  
@@ -274,13 +279,18 @@ int main (void) {
 	osThreadNew(tLeft, NULL, NULL);
 	osThreadNew(tStop, NULL, NULL);
 
+
+	
+	runLedCycle1Thread();
+	runLedFlash500Thread();
+	//turnOnLed();
+	
+	osThreadNew(tRunningSound, NULL, NULL);
+	
 	osThreadNew(tTurnRightForward, NULL, NULL);
 	osThreadNew(tTurnLefttForward, NULL, NULL);
 	osThreadNew(tTurnRightBackward, NULL, NULL);
 	osThreadNew(tTurnLeftBackward, NULL, NULL);
-	
-	osThreadNew(tRunningSound, NULL, NULL);
-	
   osKernelStart();                      // Start thread execution
   for (;;) {}
 }

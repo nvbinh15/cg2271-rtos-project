@@ -1,6 +1,6 @@
 Dependencies for Project 'myBrain', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (.\main.c)(0x624BF2D9)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x624C1DEA)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\RTE\_Target_1\RTE_Components.h)(0x624BBB22)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
@@ -8,35 +8,41 @@ I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include\cmsis_os2.h)(0x5C8F1798)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (gpio.h)(0x624BB997)
-I (uart.h)(0x624BBA1E)
+I (gpio.h)(0x624BF3A5)
+I (uart.h)(0x624BF3A5)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
 I (i2c.h)(0x623D4061)
-I (motor.h)(0x624BBB22)
-F (.\gpio.c)(0x624BB9AA)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\gpio.o --omf_browse .\objects\gpio.crf --depend .\objects\gpio.d)
-I (gpio.h)(0x624BB997)
+I (sound.h)(0x624C1005)
+I (motor.h)(0x624BF3A5)
+I (ledCycle.h)(0x624BF3A5)
+I (mpu6050.h)(0x624BF3A5)
+I (sonar.h)(0x624BF3A5)
+I (sensors.h)(0x624BF3A5)
+I (autorun.h)(0x624BF3A5)
+F (.\gpio.c)(0x624BF3A5)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\gpio.o --omf_browse .\objects\gpio.crf --depend .\objects\gpio.d)
+I (gpio.h)(0x624BF3A5)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0plus.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
-F (.\gpio.h)(0x624BB997)()
-F (.\uart.c)(0x624BBB22)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
+F (.\gpio.h)(0x624BF3A5)()
+F (.\uart.c)(0x624BF3A5)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0plus.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
-I (uart.h)(0x624BBA1E)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
+I (uart.h)(0x624BF3A5)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
-F (.\uart.h)(0x624BBA1E)()
+F (.\uart.h)(0x624BF3A5)()
 F (.\pwm.c)(0x62343D1F)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\pwm.o --omf_browse .\objects\pwm.crf --depend .\objects\pwm.d)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
@@ -44,7 +50,7 @@ I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
 I (pwm.h)(0x62343D05)
 F (.\pwm.h)(0x62343D05)()
 F (.\i2c.h)(0x623D4061)()
@@ -56,114 +62,114 @@ I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
-F (.\sound.h)(0x624BE402)()
-F (.\sound.c)(0x624BE452)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\sound.o --omf_browse .\objects\sound.crf --depend .\objects\sound.d)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
+F (.\sound.h)(0x624C1005)()
+F (.\sound.c)(0x624C101B)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\sound.o --omf_browse .\objects\sound.crf --depend .\objects\sound.d)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0plus.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
-I (sound.h)(0x624BE402)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
+I (sound.h)(0x624C1005)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include\cmsis_os2.h)(0x5C8F1798)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-F (.\motor.c)(0x624BB981)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\motor.o --omf_browse .\objects\motor.crf --depend .\objects\motor.d)
-I (motor.h)(0x624BBB22)
+F (.\motor.c)(0x624C1D8E)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\motor.o --omf_browse .\objects\motor.crf --depend .\objects\motor.d)
+I (motor.h)(0x624BF3A5)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0plus.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
-F (.\motor.h)(0x624BBB22)()
-F (.\sonar.c)(0x624BBB22)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\sonar.o --omf_browse .\objects\sonar.crf --depend .\objects\sonar.d)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
+F (.\motor.h)(0x624BF3A5)()
+F (.\sonar.c)(0x624BF3A5)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\sonar.o --omf_browse .\objects\sonar.crf --depend .\objects\sonar.d)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0plus.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
-I (sonar.h)(0x624BB86B)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
+I (sonar.h)(0x624BF3A5)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
-I (gpio.h)(0x624BB997)
-I (sensors.h)(0x624BB8AB)
-I (clock.h)(0x624BBA69)
+I (gpio.h)(0x624BF3A5)
+I (sensors.h)(0x624BF3A5)
+I (clock.h)(0x624BF3A5)
 I (.\RTE\_Target_1\RTE_Components.h)(0x624BBB22)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include\cmsis_os2.h)(0x5C8F1798)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-F (.\sonar.h)(0x624BB86B)()
-F (.\sensors.c)(0x624BBB22)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\sensors.o --omf_browse .\objects\sensors.crf --depend .\objects\sensors.d)
+F (.\sonar.h)(0x624BF3A5)()
+F (.\sensors.c)(0x624BF3A5)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\sensors.o --omf_browse .\objects\sensors.crf --depend .\objects\sensors.d)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0plus.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
-I (mpu6050.h)(0x624BB913)
-I (sonar.h)(0x624BB86B)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
+I (mpu6050.h)(0x624BF3A5)
+I (sonar.h)(0x624BF3A5)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
-I (sensors.h)(0x624BB8AB)
-I (gpio.h)(0x624BB997)
-I (clock.h)(0x624BBA69)
-I (uart.h)(0x624BBA1E)
+I (sensors.h)(0x624BF3A5)
+I (gpio.h)(0x624BF3A5)
+I (clock.h)(0x624BF3A5)
+I (uart.h)(0x624BF3A5)
 I (.\RTE\_Target_1\RTE_Components.h)(0x624BBB22)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include\cmsis_os2.h)(0x5C8F1798)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-F (.\sensors.h)(0x624BB8AB)()
-F (.\mpu6050.h)(0x624BB913)()
-F (.\mpu6050.c)(0x624BB932)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\mpu6050.o --omf_browse .\objects\mpu6050.crf --depend .\objects\mpu6050.d)
-I (mpu6050.h)(0x624BB913)
+F (.\sensors.h)(0x624BF3A5)()
+F (.\mpu6050.h)(0x624BF3A5)()
+F (.\mpu6050.c)(0x624BF3A5)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\mpu6050.o --omf_browse .\objects\mpu6050.crf --depend .\objects\mpu6050.d)
+I (mpu6050.h)(0x624BF3A5)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0plus.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
 I (i2c.h)(0x623D4061)
-I (sensors.h)(0x624BB8AB)
-F (.\autorun.h)(0x624BB9C9)()
-F (.\autorun.c)(0x624BBB22)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\autorun.o --omf_browse .\objects\autorun.crf --depend .\objects\autorun.d)
+I (sensors.h)(0x624BF3A5)
+F (.\autorun.h)(0x624BF3A5)()
+F (.\autorun.c)(0x624BF3A5)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\autorun.o --omf_browse .\objects\autorun.crf --depend .\objects\autorun.d)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0plus.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
-I (mpu6050.h)(0x624BB913)
-I (sonar.h)(0x624BB86B)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
+I (mpu6050.h)(0x624BF3A5)
+I (sonar.h)(0x624BF3A5)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
-I (sensors.h)(0x624BB8AB)
-I (gpio.h)(0x624BB997)
-I (clock.h)(0x624BBA69)
-I (uart.h)(0x624BBA1E)
-I (motor.h)(0x624BBB22)
-I (autorun.h)(0x624BB9C9)
+I (sensors.h)(0x624BF3A5)
+I (gpio.h)(0x624BF3A5)
+I (clock.h)(0x624BF3A5)
+I (uart.h)(0x624BF3A5)
+I (motor.h)(0x624BF3A5)
+I (autorun.h)(0x624BF3A5)
 I (.\RTE\_Target_1\RTE_Components.h)(0x624BBB22)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include\cmsis_os2.h)(0x5C8F1798)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5D9AD212)
-F (.\clock.c)(0x624BBB22)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\clock.o --omf_browse .\objects\clock.crf --depend .\objects\clock.d)
+F (.\clock.c)(0x624BF3A5)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\clock.o --omf_browse .\objects\clock.crf --depend .\objects\clock.d)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585B7C0A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0plus.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
-I (clock.h)(0x624BBA69)
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
+I (clock.h)(0x624BF3A5)
 I (.\RTE\_Target_1\RTE_Components.h)(0x624BBB22)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include\cmsis_os2.h)(0x5C8F1798)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include\os_tick.h)(0x5B617084)
-F (.\clock.h)(0x624BBA69)()
-F (.\ledCycle.h)(0x624BDEEE)()
+F (.\clock.h)(0x624BF3A5)()
+F (.\ledCycle.h)(0x624BF3A5)()
 F (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib)(0x5D2590B8)()
 F (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Source\rtx_lib.c)(0x5D2590B8)(--c99 --gnu -c --cpu Cortex-M0+ -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\CMSIS-I.\RTE\Device\MKL25Z128xxx4-I.\RTE\_Target_1-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include"-I"C:\Users\Van Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include"-D__UVISION_VERSION="529" -D_RTE_ -DMKL25Z128xxx4-o .\objects\rtx_lib.o --omf_browse .\objects\rtx_lib.crf --depend .\objects\rtx_lib.d)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
@@ -191,5 +197,5 @@ I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D2590B6)
 I (C:\Users\Van Binh\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D2590B6)
-I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)
-F (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x623D4206)()
+I (.\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)
+F (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x624C1D3C)()
