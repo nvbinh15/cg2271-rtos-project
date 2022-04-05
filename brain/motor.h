@@ -4,14 +4,15 @@
 #include "MKL25Z4.h"
 
 typedef enum motor_direction {
-  FORWARD,
+  FOWARD,
   REVERSE
 } motor_direction_t;
 
 void MotorsInit(void);
-uint32_t dutyCycleToPWM(int duty_cycle);
-void leftMove(motor_direction_t direction, int value);
-void rightMove(motor_direction_t direction, int value);
+uint32_t dutyCycleToPWM(float duty_cycle);
+void leftMove(motor_direction_t direction, float value);
+void rightMove(motor_direction_t direction, float value);
+void motorStop(void);
 
 /**
  * BELOW defintions NEWLY ADDED

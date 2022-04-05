@@ -16,6 +16,7 @@ typedef enum GPIO_state {
 
 void GPIOInitOutput(PORT_Type* GPIOPort, int GPIOPin);
 void GPIOSetOutput(PORT_Type* GPIOPort, int GPIOPin, GPIO_state_t state);
+void GPIOToggleOutput(PORT_Type* GPIOPort, int GPIOPin);
 
 void InitLED(void);
 void offLED(void);

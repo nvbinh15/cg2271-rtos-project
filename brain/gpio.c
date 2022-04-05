@@ -65,6 +65,28 @@ void GPIOSetOutput(PORT_Type* GPIOPort, int GPIOPin, GPIO_state_t state) {
   }
 }
 
+void GPIOToggleOutput(PORT_Type* GPIOPort, int GPIOPin) {
+  GPIO_Type* GPIO = 0;
+  
+  if (GPIOPort == PORTA) {
+    GPIO = GPIOA;
+  }
+  else if (GPIOPort == PORTB) {
+    GPIO = GPIOB;
+  }
+  else if (GPIOPort == PORTC) {
+    GPIO = GPIOC;
+  }
+  else if (GPIOPort == PORTD) {
+    GPIO = GPIOD;
+  }
+  else if (GPIOPort == PORTE) {
+    GPIO = GPIOE;
+  }
+  
+  GPIO->PDOR ^= MASK(GPIOPin);
+}
+
 /* Initialize LEDs */
 void InitLED(void) {
 	// Enable Clock to PORTB and PORTD

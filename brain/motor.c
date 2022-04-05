@@ -56,42 +56,49 @@ void MotorsInit(void) {
   TPM2->CNT = 0;
 }
 
-uint32_t dutyCycleToPWM(int duty_cycle) {
+uint32_t dutyCycleToPWM(float duty_cycle) {
   if (duty_cycle > 100) 
     duty_cycle = 100;
   if (duty_cycle < 0) 
     duty_cycle = 0;
-  return (uint32_t) (((float) duty_cycle / 100) * (6000 + 1));
+  return (uint32_t) (((float) duty_cycle / 100.0f) * (6000 + 1));
 }
 
-void leftMove(motor_direction_t direction, int value) {
+void rightMove(motor_direction_t direction, float value) {
   uint32_t pwm_value = dutyCycleToPWM(value);
   switch (direction) {
-    case FORWARD:
+    case REVERSE:
       TPM1_C0V = pwm_value;
       TPM1_C1V = 0;
       break;
     
-    case REVERSE:
+    case FOWARD:
       TPM1_C0V = 0;
       TPM1_C1V = pwm_value;
       break;
   }
 }
 
-void rightMove(motor_direction_t direction, int value) {
+void leftMove(motor_direction_t direction, float value) {
   uint32_t pwm_value = dutyCycleToPWM(value);
   switch (direction) {
-    case FORWARD:
+    case REVERSE:
       TPM2_C0V = pwm_value;
       TPM2_C1V = 0;
       break;
     
-    case REVERSE:
+    case FOWARD:
       TPM2_C0V = 0;
       TPM2_C1V = pwm_value;
       break;
   }
+}
+
+void motorStop(void) {
+  TPM1_C0V = 6000;
+  TPM1_C1V = 6000;
+  TPM2_C0V = 6000;
+  TPM2_C0V = 6000;
 }
 
 /**
@@ -103,8 +110,8 @@ void rightMove(motor_direction_t direction, int value) {
  * Move forward with 100% Duty cycle
  */ 
 void forward(void) {
-  leftMove(FORWARD, 100);
-  rightMove(FORWARD, 100);
+  leftMove(FOWARD, 100);
+  rightMove(FOWARD, 100);
 }
 
 /**
@@ -119,7 +126,7 @@ void backward(void) {
  * Pivot turn right with 100% Duty cycle
  */
 void right(void) {
-  leftMove(FORWARD, 100);
+  leftMove(FOWARD, 100);
   rightMove(REVERSE, 100);
 }
 
@@ -128,15 +135,14 @@ void right(void) {
  */
 void left(void) {
   leftMove(REVERSE, 100);
-  rightMove(FORWARD, 100);
+  rightMove(FOWARD, 100);
 }
 
 /**
  * Duty cycle for TPM1 C0+C1 TPM2 C0+C1 set to 0
  */
 void stop(void) {
-  leftMove(FORWARD, 0);
-  rightMove(FORWARD, 0);
+  motorStop();
 }
 
 /**
@@ -145,8 +151,8 @@ void stop(void) {
  * Vary duty_cycle parameter to change turn curvature
  */
 void turnRightForward(int duty_cycle) {
-  leftMove(FORWARD, 100);
-  rightMove(FORWARD, duty_cycle);
+  leftMove(FOWARD, 100);
+  rightMove(FOWARD, duty_cycle);
 }
 
 /**
@@ -155,8 +161,8 @@ void turnRightForward(int duty_cycle) {
  * Vary duty_cycle parameter to change turn curvature
  */
 void turnLeftForward(int duty_cycle) {
-  leftMove(FORWARD, duty_cycle);
-  rightMove(FORWARD, 100);
+  leftMove(FOWARD, duty_cycle);
+  rightMove(FOWARD, 100);
 }
 
 /**

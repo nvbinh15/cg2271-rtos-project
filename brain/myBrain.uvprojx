@@ -447,6 +447,56 @@
               <FileType>5</FileType>
               <FilePath>.\motor.h</FilePath>
             </File>
+            <File>
+              <FileName>sonar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\sonar.c</FilePath>
+            </File>
+            <File>
+              <FileName>sonar.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\sonar.h</FilePath>
+            </File>
+            <File>
+              <FileName>sensors.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\sensors.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensors.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\sensors.h</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\mpu6050.h</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\mpu6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>autorun.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\autorun.h</FilePath>
+            </File>
+            <File>
+              <FileName>autorun.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\autorun.c</FilePath>
+            </File>
+            <File>
+              <FileName>clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>clock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\clock.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -18,4 +18,7 @@ void UARTTransmit(UART_Type* UART, uint8_t data);
 void UART1_IRQHandler(void);
 void UART2_IRQHandler(void);
 
+void UARTWriteInt(UART_Type* UART, int num);
+void UARTWriteFloat(UART_Type* UART, float num);
+
 #endif
