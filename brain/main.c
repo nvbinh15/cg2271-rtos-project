@@ -11,25 +11,34 @@
 #include "i2c.h"
 #include "sound.h"
 #include "motor.h"
+/*
+#include "ledCycle.h"
+
+// sensors related files
+#include "mpu6050.h"
+#include "sonar.h"
+#include "sensors.h"
+#include "autorun.h"
+*/
 
 #define DUTY_CYCLE_TURN	50
 
-#define FORWARD 0x30
-#define BACKWARD 0x31
-#define LEFT 0x32
-#define RIGHT 0x33
-#define STOP 0x34
-#define STOP_FORWARD 0x35
-#define STOP_BACKWARD 0x36
-#define STOP_LEFT 0x37
-#define STOP_RIGHT 0x38
-#define RIGHT_FORWARD 0x39
-#define LEFT_FORWARD 0x40
-#define RIGHT_BACKWARD 0x41
-#define LEFT_BACKWARD 0x42
+#define FORWARD						0x30
+#define BACKWARD 					0x31
+#define LEFT 							0x32
+#define RIGHT 						0x33
+#define STOP 							0x34
+#define STOP_FORWARD 			0x35
+#define STOP_BACKWARD 		0x36
+#define STOP_LEFT 				0x37
+#define STOP_RIGHT 				0x38
+#define RIGHT_FORWARD 		0x39
+#define LEFT_FORWARD 			0x40
+#define RIGHT_BACKWARD 		0x41
+#define LEFT_BACKWARD 		0x42
 
-#define AUTO 0x50
-#define FINISH 0x51
+#define AUTO 							0x50
+#define FINISH 						0x51
  
 void delay (unsigned long delay);
 volatile uint8_t data;
@@ -40,6 +49,25 @@ osEventFlagsId_t
 	flagTurnRightForward, flagTurnLeftForward, flagTurnRightBackWard, flagTurnLeftBackward,
 	flagFinish, flagAuto
 ;
+
+// sensor related callback (50hz)
+static void timerStart(void) {
+  osTimerId_t sensorCallbackId;
+  
+  if (sensorCallbackId != NULL) {
+    osStatus_t timerStatus = osTimerStart(sensorCallbackId, 20U);
+    
+    if (timerStatus != osOK) {
+      GPIOSetOutput(PORTB, 19, LOW);
+      UARTTransmit(UART2, '!');
+    }
+  }
+}
+
+void tTimerStart(void *argument) {
+  timerStart();
+  for(;;) {}
+}
 
 
 /* Delay routine */
@@ -155,8 +183,8 @@ void app_main (void *argument) {
   // ...
 
   for (;;) {
-		osEventFlagsSet(flagRunningSound, 0x01);
 		
+		osEventFlagsSet(flagRunningSound, 0x01);
 		if (data == FORWARD) { // forward
 			osEventFlagsSet(flagForward, 0x01);
 		} else if (data == BACKWARD) { // backward
@@ -195,6 +223,9 @@ void app_main (void *argument) {
 			osEventFlagsSet(flagTurnRightBackWard, 0x01);
 		} else if (data == LEFT_BACKWARD) {
 			osEventFlagsSet(flagTurnLeftBackward, 0x01);
+		} else if (data == FINISH) {
+			osEventFlagsSet(flagEndingSound, 0x01);
+			osEventFlagsClear(flagRunningSound, 0x01);
 		}
 		
 
@@ -208,6 +239,7 @@ int main (void) {
 	MotorsInit();
 	initSound();
 	offLED();
+	play_running_sound();
 	
 	flagForward = osEventFlagsNew(NULL);
 	flagRight = osEventFlagsNew(NULL);
@@ -220,6 +252,8 @@ int main (void) {
 	flagTurnLeftForward = osEventFlagsNew(NULL);
 	flagTurnRightBackWard = osEventFlagsNew(NULL);
 	flagTurnLeftBackward = osEventFlagsNew(NULL);
+	
+	osEventFlagsSet(flagRunningSound, 0x01);
 
 	flagFinish = osEventFlagsNew(NULL);
 	flagAuto = osEventFlagsNew(NULL);

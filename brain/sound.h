@@ -92,7 +92,7 @@
 #define NOTE_DS8 4978
 #define REST      0
 
-#define PTE21_PIN	21
+#define PTE30_PIN	30
 
 #define ENDING_SOUND_LEN 25
 #define RUNNING_SOUNT_LEN 96

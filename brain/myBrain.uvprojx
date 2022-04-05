@@ -497,6 +497,11 @@
               <FileType>5</FileType>
               <FilePath>.\clock.h</FilePath>
             </File>
+            <File>
+              <FileName>ledCycle.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ledCycle.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
