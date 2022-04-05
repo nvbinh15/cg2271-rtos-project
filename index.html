@@ -11,8 +11,8 @@
         .button {
             align-items: center;
             display: inline-block;
-            padding: 3%;
-            margin: .5rem 2% .5rem 2%;
+            padding: 1.5%;
+            margin: .25rem 1% .25rem 1%;
         }
 
         .button_arrow {
@@ -84,8 +84,8 @@
         }
 
         .button_auto {
-            margin: 2rem 2rem 0 2rem;
-            padding: 2rem 5rem 2rem 5rem;
+            margin: 1rem 1rem 0 1rem;
+            padding: 1.5rem 4rem 1.5rem 4rem;
         }
     </style>
 </head>
@@ -148,13 +148,19 @@
     <div>
 
         <button class="button button_auto" onclick="auto()">
-            Start
+            Auto
         </button>
 
         <button class="button button_auto" onclick="finish()">
             Finish
         </button>
     </div>
+
+    <!-- <div>
+        <button class="button button_auto" onclick="finish()">
+            Auto
+        </button> 
+    </div> -->
 
 
 </body>
@@ -228,6 +234,14 @@
 
     function turnLeftBackward() {
         fetch('http://' + ipAddress + '/turnLeftBackward')
+    }
+
+    function auto() {
+        fetch('http://' + ipAddress + '/auto')    
+    }
+
+    function finish() {
+        fetch('http://' + ipAddress + '/finish')    
     }
 
     let l, r, u, d;

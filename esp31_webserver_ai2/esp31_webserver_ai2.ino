@@ -18,6 +18,10 @@
 #define RIGHT_BACKWARD 0x41
 #define LEFT_BACKWARD 0x42
 
+#define AUTO 0x50
+#define FINISH 0x51
+
+
 // Replace with your network credentials
 const char* ssid = "binh";
 const char* password = "12345678";
@@ -152,6 +156,14 @@ void loop() {
 
   if(req.indexOf("turnLeftBackward") != -1) {
     Serial2.write(LEFT_BACKWARD);
+  }
+
+  if(req.indexOf("auto") != -1) {
+    Serial2.write(AUTO);
+  }
+
+  if(req.indexOf("finish") != -1) {
+    Serial2.write(FINISH);
   }
 
   client.println("HTTP/1.1 200 OK");

@@ -28,6 +28,8 @@
 #define RIGHT_BACKWARD 0x41
 #define LEFT_BACKWARD 0x42
 
+#define AUTO 0x50
+#define FINISH 0x51
  
 void delay (unsigned long delay);
 volatile uint8_t data;
@@ -35,7 +37,8 @@ volatile uint8_t data;
 osEventFlagsId_t 
 	flagForward, flagBackward, flagRight, flagLeft, flagStop,
 	flagRunningSound, flagEndingSound, 
-	flagTurnRightForward, flagTurnLeftForward, flagTurnRightBackWard, flagTurnLeftBackward
+	flagTurnRightForward, flagTurnLeftForward, flagTurnRightBackWard, flagTurnLeftBackward,
+	flagFinish, flagAuto
 ;
 
 
@@ -131,7 +134,7 @@ void tTurnLeftBackward(void *argument) {
 
 	for (;;) {
 		osEventFlagsWait(flagTurnLeftBackward, 0x01, osFlagsWaitAny, osWaitForever);
-		turnLeftBackwardDUTY_CYCLE_TURN();
+		turnLeftBackward(DUTY_CYCLE_TURN);
 	}
 }
 
@@ -202,7 +205,7 @@ int main (void) {
 	
   // System Initialization
   SystemCoreClockUpdate();
-	initMotor();
+	MotorsInit();
 	initSound();
 	offLED();
 	
@@ -217,6 +220,9 @@ int main (void) {
 	flagTurnLeftForward = osEventFlagsNew(NULL);
 	flagTurnRightBackWard = osEventFlagsNew(NULL);
 	flagTurnLeftBackward = osEventFlagsNew(NULL);
+
+	flagFinish = osEventFlagsNew(NULL);
+	flagAuto = osEventFlagsNew(NULL);
 
   UARTInit(UART2, PIN_PAIR_3, 9600, true);
  

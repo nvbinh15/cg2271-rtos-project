@@ -94,7 +94,3 @@ void stop_sound(void) {
 		TPM1_C1V = 0;
     osDelay(50);
 }
-
-
-
-	
