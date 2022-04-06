@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\myBrain.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\myBrain.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Apr 06 07:05:43 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Apr 06 20:39:45 2022
 <BR><P>
 <H3>Maximum Stack Usage =        192 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -106,8 +106,8 @@ Function Pointers
 Global Symbols
 </H3>
 <P><STRONG><a name="[50]"></a>__main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, __main.o(!!!main))
-<BR><BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
-<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<BR><BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
 <P><STRONG><a name="[56]"></a>__scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter))
@@ -189,8 +189,8 @@ Global Symbols
 <P><STRONG><a name="[112]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C))
 
 <P><STRONG><a name="[57]"></a>__rt_entry</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry.o(.ARM.Collect$$rtentry$$00000000))
-<BR><BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
-<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+<BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
 </UL>
 
 <P><STRONG><a name="[113]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000002))
@@ -409,9 +409,9 @@ Global Symbols
 <P><STRONG><a name="[118]"></a>__rt_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
 
 <P><STRONG><a name="[a7]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
-<LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxKernelInitialize
+<BR><BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxKernelInitialize
 <LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMutexNew
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
 </UL>
 
 <P><STRONG><a name="[119]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
@@ -715,18 +715,18 @@ Global Symbols
 <P><STRONG><a name="[a3]"></a>osRtxMemoryAlloc</STRONG> (Thumb, 124 bytes, Stack size 28 bytes, rtx_memory.o(.text.osRtxMemoryAlloc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = osRtxMemoryAlloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
-<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMutexNew
+<BR>[Called By]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMutexNew
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxEventFlagsNew
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMessageQueueNew
 </UL>
 
 <P><STRONG><a name="[97]"></a>osRtxMemoryFree</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, rtx_memory.o(.text.osRtxMemoryFree))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = osRtxMemoryFree
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadFree
+<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadFree
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMutexDelete
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMessageQueueNew
 </UL>
 
@@ -736,10 +736,10 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> rtx_kernel.o(.text.svcRtxKernelInitialize)
 </UL>
 <P><STRONG><a name="[87]"></a>osRtxMemoryPoolAlloc</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, rtx_mempool.o(.text.osRtxMemoryPoolAlloc))
-<BR><BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
-<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMutexNew
+<BR><BR>[Called By]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMutexNew
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxEventFlagsNew
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageQueuePut
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
 <LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMessageQueuePut
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMessageQueueNew
 <LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMessageQueueGet
@@ -749,9 +749,9 @@ Global Symbols
 <P><STRONG><a name="[8b]"></a>osRtxMemoryPoolFree</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, rtx_mempool.o(.text.osRtxMemoryPoolFree))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = osRtxMemoryPoolFree
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadFree
+<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadFree
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMutexDelete
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMessageQueueNew
 <LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMessageQueueGet
 <LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMessageQueuePostProcess
@@ -808,13 +808,13 @@ Global Symbols
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadReadyPut
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadListRemove
 </UL>
-<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
-<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxTick_Handler
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxTick_Handler
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxPendSV_Handler
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMutexRelease
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxMutexDelete
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxEventFlagsSet
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitExit
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxThreadNew
 </UL>
 
 <P><STRONG><a name="[8c]"></a>osRtxThreadListGet</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, rtx_thread.o(.text.osRtxThreadListGet))

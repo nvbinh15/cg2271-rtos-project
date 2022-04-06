@@ -45,14 +45,14 @@ compiling motor.c...
 compiling sonar.c...
 compiling sensors.c...
 compiling mpu6050.c...
-compiling clock.c...
 compiling autorun.c...
-compiling rtx_lib.c...
+compiling clock.c...
 assembling startup_MKL25Z4.s...
+compiling rtx_lib.c...
 compiling RTX_Config.c...
 compiling system_MKL25Z4.c...
 linking...
-Program Size: Code=15408 RO-data=708 RW-data=5696 ZI-data=2424  
+Program Size: Code=15408 RO-data=708 RW-data=5704 ZI-data=2424  
 ".\Objects\myBrain.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
@@ -89,25 +89,25 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:RTOS2:Keil RTX5:Library:5.5.1
       Include file:  CMSIS\RTOS2\RTX\Config\RTX_Config.h
+      Source file:   CMSIS\RTOS2\RTX\Template\Thread.c
+      Library file:  CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib
+      Source file:   CMSIS\RTOS2\RTX\Template\Events.c
+      Source file:   CMSIS\RTOS2\RTX\Template\main.c
+      Source file:   CMSIS\RTOS2\RTX\Template\MemPool.c
+      Source file:   CMSIS\RTOS2\RTX\Template\MsgQueue.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Mutex.c
+      Include file:  CMSIS\RTOS2\RTX\Include\rtx_os.h
       Source file:   CMSIS\RTOS2\RTX\Template\svc_user.c
       Source file:   CMSIS\RTOS2\RTX\Source\rtx_lib.c
       Source file:   CMSIS\RTOS2\RTX\Config\RTX_Config.c
-      Library file:  CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib
-      Source file:   CMSIS\RTOS2\RTX\Template\Mutex.c
-      Source file:   CMSIS\RTOS2\RTX\Template\MsgQueue.c
-      Include file:  CMSIS\RTOS2\RTX\Include\rtx_os.h
-      Source file:   CMSIS\RTOS2\RTX\Template\MemPool.c
-      Source file:   CMSIS\RTOS2\RTX\Template\Thread.c
-      Source file:   CMSIS\RTOS2\RTX\Template\Events.c
-      Source file:   CMSIS\RTOS2\RTX\Template\main.c
-      Source file:   CMSIS\RTOS2\RTX\Template\Timer.c
       Source file:   CMSIS\RTOS2\RTX\Template\Semaphore.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Timer.c
 
    * Component: Keil::Device:Startup:2.5.0
       Source file:   Device\Source\ARM\startup_MKL25Z4.s
       Source file:   Device\Source\system_MKL25Z4.c
       Include file:  Device\Source\system_MKL25Z4.h
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>
