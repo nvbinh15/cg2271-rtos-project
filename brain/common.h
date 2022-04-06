@@ -6,7 +6,7 @@
 #include "cmsis_os2.h"
 #include "MKL25Z4.h"
 
-#define DUTY_CYCLE_TURN	50
+#define DUTY_CYCLE_TURN	10
 
 #define FORWARD 0x30
 #define BACKWARD 0x31

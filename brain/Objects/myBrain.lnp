@@ -11,7 +11,7 @@
 ".\objects\mpu6050.o"
 ".\objects\autorun.o"
 ".\objects\clock.o"
-"E:\Keil uVision\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib"
+"..\..\..\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib"
 ".\objects\rtx_lib.o"
 ".\objects\rtx_config.o"
 ".\objects\startup_mkl25z4.o"

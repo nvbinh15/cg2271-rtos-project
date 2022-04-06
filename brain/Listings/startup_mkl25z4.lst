@@ -608,14 +608,14 @@ ARM Macro Assembler    Page 10
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
 work --depend=.\objects\startup_mkl25z4.d -o.\objects\startup_mkl25z4.o -I.\RTE
-\CMSIS -I.\RTE\Device\MKL25Z128xxx4 -I.\RTE\_Target_1 -I"E:\Keil uVision\ARM\CM
-SIS\5.6.0\CMSIS\Core\Include" -I"E:\Keil uVision\ARM\CMSIS\5.6.0\CMSIS\RTOS2\In
-clude" -I"E:\Keil uVision\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include" -I"E:\Keil u
-Vision\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include" --predefine="__RTX SETA 1" 
---predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 534" --predefin
-e="_RTE_ SETA 1" --predefine="MKL25Z128xxx4 SETA 1" --predefine="_RTE_ SETA 1" 
---list=.\listings\startup_mkl25z4.lst RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.
-s
+\CMSIS -I.\RTE\Device\MKL25Z128xxx4 -I.\RTE\_Target_1 -I"C:\Users\Van Binh\AppD
+ata\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include" -I"C:\Users\Van Binh\Ap
+pData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\Include" -I"C:\Users\Van Binh
+\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\RTOS2\RTX\Include" -I"C:\Users\V
+an Binh\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include" --
+predefine="__RTX SETA 1" --predefine="__EVAL SETA 1" --predefine="__UVISION_VER
+SION SETA 529" --predefine="_RTE_ SETA 1" --predefine="MKL25Z128xxx4 SETA 1" --
+list=.\listings\startup_mkl25z4.lst RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
 
 
 
