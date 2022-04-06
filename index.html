@@ -156,11 +156,11 @@
         </button>
     </div>
 
-    <!-- <div>
-        <button class="button button_auto" onclick="finish()">
-            Auto
+    <div>
+        <button class="button button_auto" onclick="silent()">
+            Silent
         </button> 
-    </div> -->
+    </div>
 
 
 </body>
@@ -242,6 +242,10 @@
 
     function finish() {
         fetch('http://' + ipAddress + '/finish')    
+    }
+
+    function silent() {
+        fetch('http://' + ipAddress + '/silent')    
     }
 
     let l, r, u, d;

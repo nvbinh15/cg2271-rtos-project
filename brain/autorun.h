@@ -11,8 +11,10 @@
 #define DIST_CLOSE_ENOUGH  0.5f
 //#define MOVE_TIME          800  // for hexagon
 //#define STOP_DISTANCE       30  // for hexagon
-#define MOVE_TIME            1050
+#define MOVE_TIME            670
 #define STOP_DISTANCE        28
+#define TURN_SPEED_BASE      28
+
 
 
 typedef enum autorun_states {
@@ -35,10 +37,10 @@ typedef enum turning_states {
   TURN_END
 } turning_states_t;
 
-extern osEventFlagsId_t flagAutoRun;
-
 extern autorun_states_t curr_state;
 extern turning_states_t turning_curr_state;
+extern volatile osEventFlagsId_t flagAutoRun;
+
 
 void tAutoRun(void *argument);
 void tDebugState(void *argument);

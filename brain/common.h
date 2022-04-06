@@ -6,7 +6,7 @@
 #include "cmsis_os2.h"
 #include "MKL25Z4.h"
 
-#define DUTY_CYCLE_TURN	20
+#define DUTY_CYCLE_TURN	50
 
 #define FORWARD 0x30
 #define BACKWARD 0x31
@@ -24,7 +24,7 @@
 
 #define AUTO 0x50
 #define FINISH 0x51
-
+#define SILENT 0x52
 
 extern osEventFlagsId_t 
 	flagRunningSound, flagEndingSound, 

@@ -48,19 +48,6 @@ void initSound(void) {
 	TPM0_C3SC |= (TPM_CnSC_ELSB(1) | TPM_CnSC_MSB(1));
 }
 
-
-// void play_running_sound(void) {
-	
-// 		for (int i = 0; i < RUNNING_SOUND_LEN && r_sound == 0; i++) {
-// 			if (running_song[i] != 0) {
-// 				TPM0->MOD = 375000 / running_song[i];
-// 				TPM0_C3V =  375000 / running_song[i] / 10;
-// 			}
-// 			osDelay(200);
-// 		}
-
-// }
-
 void play_ending_sound(void) {
 	
 	for (int i = 0; i < ENDING_SOUND_LEN; i++) {
@@ -70,7 +57,6 @@ void play_ending_sound(void) {
 			}
 			osDelay(200);
 		}
-
 }
 
 /* Stops the audio */

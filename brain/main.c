@@ -20,7 +20,6 @@
 #include "common.h"
 
 
-
 osEventFlagsId_t 
 	flagRunningSound, flagEndingSound, 
 	flagFinish, flagAuto,
@@ -139,6 +138,10 @@ void app_main (void *argument) {
 		} else if (data == FINISH) {
 			osEventFlagsClear(flagRunningSound, 0x01);
 			osEventFlagsSet(flagEndingSound, 0x01);
+		} else if (data == SILENT) {
+			stop_sound();
+			osEventFlagsClear(flagRunningSound, 0x01);
+			osEventFlagsClear(flagEndingSound, 0x01);			
 		}
 		
 	}
@@ -182,6 +185,10 @@ int main (void) {
 	
 	osThreadNew(tRunningSound, NULL, NULL);
 	osThreadNew(tEndingSound, NULL, NULL);
+	
+	// auto run
+  //osThreadNew(tTimerStart, NULL, NULL);
+	//osThreadNew(tAutoRun, NULL, NULL);
 	
   osKernelStart();                      // Start thread execution
   for (;;) {}

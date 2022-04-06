@@ -20,6 +20,7 @@
 
 #define AUTO 0x50
 #define FINISH 0x51
+#define SILENT 0x52
 
 
 // Replace with your network credentials
@@ -125,23 +126,6 @@ void loop() {
   if(req.indexOf("stop") != -1) {
     Serial2.write(STOP);
   }
-/*
-  if(req.indexOf("stopForward") != -1) {
-    Serial2.write(STOP_FORWARD);
-  }
-
-  if(req.indexOf("stopBackward") != -1) {
-    Serial2.write(STOP_BACKWARD);
-  }
-
-  if(req.indexOf("stopLeft") != -1) {
-    Serial2.write(STOP_LEFT);
-  }
-
-  if(req.indexOf("stopRight") != -1) {
-    Serial2.write(STOP_RIGHT);
-  }
-*/
 
   if(req.indexOf("turnRightForward") != -1) {
     Serial2.write(RIGHT_FORWARD);
@@ -165,6 +149,10 @@ void loop() {
 
   if(req.indexOf("finish") != -1) {
     Serial2.write(FINISH);
+  }
+
+  if(req.indexOf("silent") != -1) {
+    Serial2.write(SILENT);
   }
 
   client.println("HTTP/1.1 200 OK");
