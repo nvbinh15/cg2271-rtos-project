@@ -77,15 +77,15 @@ void pulse(ledArrayNode node) {
  */
 void ledRun1(void* argument) {
 	ledArrayNode node0 = initNode(13, PORTA);
-	ledArrayNode node5 = initNode(16, PORTA);
-	ledArrayNode node9 = initNode(12, PORTC);
-	ledArrayNode node8 = initNode(13, PORTC);
-	ledArrayNode node7 = initNode(16, PORTC);
-	ledArrayNode node6 = initNode(17, PORTC);
+	ledArrayNode node1 = initNode(5, PORTD);
 	ledArrayNode node2 = initNode(0, PORTD);
 	ledArrayNode node3 = initNode(2, PORTD);
 	ledArrayNode node4 = initNode(3, PORTD);
-	ledArrayNode node1 = initNode(5, PORTD);
+	ledArrayNode node5 = initNode(16, PORTA);
+	ledArrayNode node6 = initNode(17, PORTC);
+	ledArrayNode node7 = initNode(16, PORTC);
+	ledArrayNode node8 = initNode(13, PORTC);
+	ledArrayNode node9 = initNode(12, PORTC);
 	
 	//construct list of nodes
 	ledArrayNode nodeArray[10] = {node0, node1, node2, node3, node4, node5, node6, node7, node8, node9};
@@ -157,15 +157,15 @@ void onLED(ledArrayNode* arr) {
 }
 void onALLLED(void *argument) {
 	ledArrayNode node0 = initNode(13, PORTA);
-	ledArrayNode node5 = initNode(16, PORTA);
-	ledArrayNode node9 = initNode(12, PORTC);
-	ledArrayNode node8 = initNode(13, PORTC);
-	ledArrayNode node7 = initNode(16, PORTC);
-	ledArrayNode node6 = initNode(17, PORTC);
+	ledArrayNode node1 = initNode(5, PORTD);
 	ledArrayNode node2 = initNode(0, PORTD);
 	ledArrayNode node3 = initNode(2, PORTD);
 	ledArrayNode node4 = initNode(3, PORTD);
-	ledArrayNode node1 = initNode(5, PORTD);
+	ledArrayNode node5 = initNode(16, PORTA);
+	ledArrayNode node6 = initNode(17, PORTC);
+	ledArrayNode node7 = initNode(16, PORTC);
+	ledArrayNode node8 = initNode(13, PORTC);
+	ledArrayNode node9 = initNode(12, PORTC);
 	//construct list of nodes
 	ledArrayNode nodeArray[10] = {node0, node1, node2, node3, node4, node5, node6, node7, node8, node9};
 
@@ -178,6 +178,90 @@ void onALLLED(void *argument) {
 	}
 
 }
+
+
+/**
+ * CREATE FUNCTIONS TO CONTROL LEDS BASED ON MOVEMENT
+ */
+
+static ledArrayNode* frontLeds;
+static ledArrayNode* backLeds;
+
+void initFrontLed(void) {
+	ledArrayNode node0 = initNode(13, PORTA);
+	ledArrayNode node1 = initNode(5, PORTD);
+	ledArrayNode node2 = initNode(0, PORTD);
+	ledArrayNode node3 = initNode(2, PORTD);
+	ledArrayNode node4 = initNode(3, PORTD);
+	ledArrayNode node5 = initNode(16, PORTA);
+	ledArrayNode node6 = initNode(17, PORTC);
+	ledArrayNode node7 = initNode(16, PORTC);
+	ledArrayNode node8 = initNode(13, PORTC);
+	ledArrayNode node9 = initNode(12, PORTC);
+	ledArrayNode frontLedArray[10] = {node0, node1, node2,
+																		node3, node4, node5,
+																		node6, node7, node8, 
+																		node9};
+	frontLeds = frontLedArray;
+}
+
+void initBackLed(void) {
+	ledArrayNode node0 = initNode(21, PORTE);
+	ledArrayNode node1 = initNode(20, PORTE);
+	ledArrayNode node2 = initNode(5, PORTE);
+	ledArrayNode node3 = initNode(4, PORTE);
+	ledArrayNode node4 = initNode(3, PORTE);
+	ledArrayNode node5 = initNode(2, PORTE);
+	ledArrayNode node6 = initNode(11, PORTB);
+	ledArrayNode node7 = initNode(10, PORTB);
+	ledArrayNode node8 = initNode(9, PORTB);
+	ledArrayNode node9 = initNode(8, PORTB);
+	
+	//construct list of nodes
+	ledArrayNode backLedArray[10] = {node0, node1, node2,
+																node3, node4, node5,
+																node6, node7, node8,
+																node9};
+	backLeds = backLedArray;
+}
+
+void turnOnLeds(void) {
+	for (int x = 0; x < 10; ++x) {
+		GPIOSetOutput(frontLeds[x].PORT, frontLeds[x].pinNo, HIGH);
+	}
+}
+
+void cycleOnce() {
+	for(int i = 0; i < 10; ++i) {
+		GPIOSetOutput(frontLeds[i].PORT, frontLeds[i].pinNo, HIGH);
+		osDelay(50);
+		GPIOSetOutput(frontLeds[i].PORT, frontLeds[i].pinNo, LOW);
+	}
+	for(int i = 9; i > -1; --i) {
+		GPIOSetOutput(frontLeds[i].PORT, frontLeds[i].pinNo, HIGH);
+		osDelay(50);
+		GPIOSetOutput(frontLeds[i].PORT, frontLeds[i].pinNo, LOW);
+	}
+}
+
+void controlLedOnMovement(void* argument) {
+	for(;;) {
+	osEventFlagsWait(flagRunning, 0x01, osFlagsWaitAny, osWaitForever);
+	cycleOnce();
+	flashLed(backLeds, 500);
+	}
+}
+
+
+void controlLedOnStationary(void* argument) {
+	for(;;) {
+	osEventFlagsWait(flagStation, 0x01, osFlagsWaitAny, osWaitForever);
+	turnOnLeds();
+	flashLed(backLeds, 250);
+	}
+
+}
+ 
 /**
  * Thread creation
  */
@@ -197,5 +281,4 @@ osThreadId_t runLedFlash200Thread(void) {
 osThreadId_t turnOnLed(void) {
 	return osThreadNew(onALLLED, NULL, &ledon_attr);
 }
-
 #endif 
