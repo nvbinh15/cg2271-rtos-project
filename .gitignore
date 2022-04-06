@@ -50,3 +50,14 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+brain/myBrain.uvguix.Van Binh
+brain/myBrain.uvoptx
+brain/myBrain.uvprojx
+brain/Objects/main.crf
+brain/Objects/myBrain.axf
+brain/Objects/myBrain.build_log.htm
+brain/Objects/myBrain.htm
+brain/Objects/myBrain_Target 1.dep
+Labs/Lab2/MyBlinky.uvguix.ngnig
+Labs/Lab5/uart.uvguix.ngnig
+Labs/Lab6/myRTX.uvguix.ngnig

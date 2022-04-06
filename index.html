@@ -11,8 +11,8 @@
         .button {
             align-items: center;
             display: inline-block;
-            padding: 1.5%;
-            margin: .25rem 1% .25rem 1%;
+            padding: 3%;
+            margin: .5rem 2% .5rem 2%;
         }
 
         .button_arrow {
@@ -45,30 +45,6 @@
             transform: translateX(25%) rotate(45deg);
         }
 
-        .button_arrow_topleft {
-            border-bottom: 1px solid rgba(0, 0, 0.3);
-            border-left: 1px solid rgba(0, 0, 0.3);
-            transform: translateX(5%) rotate(90deg);
-        }
-
-        .button_arrow_topright {
-            border-bottom: 1px solid rgba(0, 0, 0.3);
-            border-left: 1px solid rgba(0, 0, 0.3);
-            transform: translateX(-5%) rotate(180deg);
-        }
-
-        .button_arrow_downleft {
-            border-bottom: 1px solid rgba(0, 0, 0.3);
-            border-left: 1px solid rgba(0, 0, 0.3);
-            transform: translateX(5%) rotate(0deg);
-        }
-
-        .button_arrow_downright {
-            border-bottom: 1px solid rgba(0, 0, 0.3);
-            border-left: 1px solid rgba(0, 0, 0.3);
-            transform: translateX(-5%) rotate(-90deg);
-        }
-
         body {
             font-family: sans-serif;
             text-align: center;
@@ -84,8 +60,8 @@
         }
 
         .button_auto {
-            margin: 1rem 1rem 0 1rem;
-            padding: 1.5rem 4rem 1.5rem 4rem;
+            margin: 2rem 2rem 0 2rem;
+            padding: 2rem 5rem 2rem 5rem;
         }
     </style>
 </head>
@@ -102,16 +78,8 @@
 
 
     <div class="up">
-        <button class="button" onmousedown="turnLeftForward()" onmouseup="stop()">
-            <div class="button_arrow button_arrow_topleft"></div>
-        </button>
-
         <button class="button" onmousedown="forward()" onmouseup="stopForward()">
             <div class="button_arrow button_arrow_up"></div>
-        </button>
-
-        <button class="button" onmousedown="turnRightForward()" onmouseup="stop()">
-            <div class="button_arrow button_arrow_topright"></div>
         </button>
     </div>
 
@@ -132,35 +100,21 @@
 
 
     <div class="down">
-        <button class="button" onmousedown="turnLeftBackward()" onmouseup="stop()">
-            <div class="button_arrow button_arrow_downleft"></div>
-        </button>
-
         <button class="button" onmousedown="backward()" onmouseup="stopBackward()">
             <div class="button_arrow button_arrow_down"></div>
-        </button>
-
-        <button class="button" onmousedown="turnRightBackward()" onmouseup="stop()">
-            <div class="button_arrow button_arrow_downright"></div>
         </button>
     </div>
 
     <div>
 
         <button class="button button_auto" onclick="auto()">
-            Auto
+            Start
         </button>
 
         <button class="button button_auto" onclick="finish()">
             Finish
         </button>
     </div>
-
-    <!-- <div>
-        <button class="button button_auto" onclick="finish()">
-            Auto
-        </button> 
-    </div> -->
 
 
 </body>
@@ -220,124 +174,40 @@
         fetch('http://' + ipAddress + '/stopRight')
     }
 
-    function turnRightForward() {
-        fetch('http://' + ipAddress + '/turnRightForward')
-    }
-
-    function turnLeftForward() {
-        fetch('http://' + ipAddress + '/turnLeftForward')
-    }
-
-    function turnRightBackward() {
-        fetch('http://' + ipAddress + '/turnRightBackward')
-    }
-
-    function turnLeftBackward() {
-        fetch('http://' + ipAddress + '/turnLeftBackward')
-    }
-
-    function auto() {
-        fetch('http://' + ipAddress + '/auto')    
-    }
-
-    function finish() {
-        fetch('http://' + ipAddress + '/finish')    
-    }
-
-    let l, r, u, d;
-    l = r = u = d = 0;
-    let dir = 0; 
-    /*
-    forward: 1
-    backward: 2
-    left: 3
-    right: 4
-    leftF: 5
-    rightF: 6
-    leftB: 7
-    rightB: 8
-    stop: 0
-    */
-
-    function check() {
-        if (l == 0 && r == 0 && u == 0 && d == 0 && dir != 0) {
-            stop();
-            dir = 0;
-        } else if (l == 1 && u == 1 && dir != 5) {
-            dir = 5;
-            turnLeftForward();
-        } else if (r == 1 && u == 1 && dir != 6) {
-            dir = 6;
-            turnRightForward();
-        } else if (l == 1 && d == 1 && dir != 7) {
-            dir = 7;
-            turnLeftBackward();
-        } else if (r == 1 && d == 1 && dir != 8) {
-            dir = 8;
-            turnRightBackward();
-        } else if (l == 1 && u == 0 && d == 0 && dir != 3) {
-            dir = 3;
-            left();
-        } else if (r == 1 && u == 0 && d == 0 && dir != 4) {
-            dir = 4;
-            right();
-        } else if (u == 1 && r == 0 && l == 0 && dir != 1) {
-            dir = 1;
-            forward();
-        } else if (d == 1 && r == 0 && l == 0 && dir != 2) {
-            dir = 2;
-            backward();
-        }
-    }
-
     document.addEventListener('keydown', function(e) {
     switch (e.keyCode) {
         case 37: // left
-            l = 1;
+            left();
             break;
         case 38: // up
-            u = 1;
-            d = 0;
+            forward();
             break;
         case 39: // right
-            r = 1;
+            right();
             break;
         case 40: // down
-            d = 1;
-            u = 0;
+            backward();
             break;
-        case 32: // space
+        case 8: // space
             stop();
-            l = u = r = d = 0;
             break;
-    }
-
-    if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 32) {
-        check();
     }
     });
 
     document.addEventListener('keyup', function(e) {
     switch (e.keyCode) {
         case 37: // left
-            l = 0;
+            stopLeft();
             break;
         case 38: // up
-            u = 0;
+            stopForward();
             break;
         case 39: // right
-            r = 0;
+            stopRight();
             break;
         case 40: // down
-            d = 0;
+            stopBackward();
             break;
-        case 32: 
-            stop();
-            l = u = r = d = 0;
-    }
-
-    if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 32) {
-        check();
     }
     });
 
