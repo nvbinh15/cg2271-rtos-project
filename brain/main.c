@@ -44,6 +44,9 @@ static void timerStart(void) {
 }
 
 void tTimerStart(void *argument) {
+   // auto run
+  flagAutoRun = osEventFlagsNew(NULL);
+  osEventFlagsClear(flagAutoRun, 0x01);
   timerStart();
   for(;;) {}
 }
@@ -138,11 +141,14 @@ void app_main (void *argument) {
 		} else if (data == FINISH) {
 			osEventFlagsClear(flagRunningSound, 0x01);
 			osEventFlagsSet(flagEndingSound, 0x01);
+
 		} else if (data == SILENT) {
 			stop_sound();
 			osEventFlagsClear(flagRunningSound, 0x01);
 			osEventFlagsClear(flagEndingSound, 0x01);			
-		}
+		} else if (data == AUTO) {
+      		osEventFlagsSet(flagAutoRun, 0x01);
+    	}
 		
 	}
 }
@@ -172,7 +178,8 @@ int main (void) {
 	
 	flagStation = osEventFlagsNew(NULL);
 	flagRunning = osEventFlagsNew(NULL);
-
+  
+ 
   UARTInit(UART2, PIN_PAIR_3, 9600, true);
  
   osKernelInitialize();                 // Initialize CMSIS-RTOS
@@ -185,11 +192,11 @@ int main (void) {
 	
 	osThreadNew(tRunningSound, NULL, NULL);
 	osThreadNew(tEndingSound, NULL, NULL);
-	
+
 	// auto run
   //osThreadNew(tTimerStart, NULL, NULL);
 	//osThreadNew(tAutoRun, NULL, NULL);
-	
+
   osKernelStart();                      // Start thread execution
   for (;;) {}
 }
