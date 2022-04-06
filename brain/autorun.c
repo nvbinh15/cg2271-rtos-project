@@ -23,7 +23,7 @@ static uint32_t currTime;
 static uint32_t endTime;
 
 static osTimerId_t sonarCallbackId;
-osEventFlagsId_t flagAutoRun;
+volatile osEventFlagsId_t flagAutoRun;
 /*
 void tAutoRun(void *argument) {
   for (;;) {
@@ -218,7 +218,7 @@ void tAutoRun(void *argument) {
 void tAutoRun(void *argument) {
   for (;;) {
     // get flags
-    osEventFlagsWait(flagAutoRun, 0x01, osFlagsWaitAny, osWaitForever);
+    osEventFlagsWait(flagAutoRun, 0x01, osFlagsNoClear, osWaitForever);
     sonarCallbackId = osTimerNew(sonarCallback, osTimerPeriodic, NULL, NULL);
     osTimerStart(sonarCallbackId, 100U);
     
@@ -236,11 +236,11 @@ void tAutoRun(void *argument) {
           rightMove(FOWARD, 95 + gyro_yaw_input);
         }
         
-        endTime = osKernelGetTickCount() - currTime + 2000;    // for ending exit
+        endTime = osKernelGetTickCount() - currTime + 400;    // for ending exit
         
         currTime = osKernelGetTickCount();
         
-        while (osKernelGetTickCount ()- currTime < 500) {
+        while (osKernelGetTickCount() - currTime < 150) {
           motorStop();
         }
         osTimerStop(sonarCallbackId);
@@ -258,8 +258,8 @@ void tAutoRun(void *argument) {
             // heading correction
             while (fabs(angle_yaw) < 45) {
               float correction = fabs(-45 - angle_yaw) * 0.2;
-              leftMove(REVERSE, 50 + correction);
-              rightMove(FOWARD, 50 + correction);
+              leftMove(REVERSE, TURN_SPEED_BASE + correction);
+              rightMove(FOWARD, TURN_SPEED_BASE + correction);
             }
             
             // move straight for a few moment
@@ -278,8 +278,8 @@ void tAutoRun(void *argument) {
             angle_yaw = 0;
             while (fabs(angle_yaw) < 90) {
               float correction = fabs(angle_yaw - 90) * 0.2;
-              leftMove(FOWARD, 50 + correction);
-              rightMove(REVERSE, 50 + correction);
+              leftMove(FOWARD, TURN_SPEED_BASE + correction);
+              rightMove(REVERSE, TURN_SPEED_BASE + correction);
             }
             
             // move straight for a few moment
@@ -298,8 +298,8 @@ void tAutoRun(void *argument) {
             angle_yaw = 0;
             while (fabs(angle_yaw) < 90) {
               float correction = fabs(angle_yaw - 90) * 0.2;
-              leftMove(FOWARD, 50 + correction);
-              rightMove(REVERSE, 50 + correction);
+              leftMove(FOWARD, TURN_SPEED_BASE + correction);
+              rightMove(REVERSE, TURN_SPEED_BASE + correction);
             }
             
             // move straight for a few moment
@@ -318,8 +318,8 @@ void tAutoRun(void *argument) {
             angle_yaw = 0;
             while (fabs(angle_yaw) < 90) {
               float correction = fabs(angle_yaw - 90) * 0.2;
-              leftMove(FOWARD, 50 + correction);
-              rightMove(REVERSE, 50 + correction);
+              leftMove(FOWARD, TURN_SPEED_BASE + correction);
+              rightMove(REVERSE, TURN_SPEED_BASE + correction);
             }
             
             // move straight for a few moment
@@ -332,14 +332,14 @@ void tAutoRun(void *argument) {
             next_turning_state = TURN_FIFTH;
           }
           
-          // right turn
+          // left turn
           else if (turning_curr_state == TURN_FIFTH) {
             //target_heading = angle_yaw + 60;
             angle_yaw = 0;
-            while (fabs(angle_yaw) < 45) {
-              float correction = fabs(-45 - angle_yaw) * 0.2;
-              leftMove(REVERSE, 50 + correction);
-              rightMove(FOWARD, 50 + correction);
+            while (fabs(angle_yaw) < 60) {
+              float correction = fabs(-60 - angle_yaw) * 0.2;
+              leftMove(REVERSE, TURN_SPEED_BASE + correction);
+              rightMove(FOWARD, TURN_SPEED_BASE + correction);
             }
             next_turning_state = TURN_END; // exit the turn loop
           }
@@ -362,10 +362,10 @@ void tAutoRun(void *argument) {
       curr_state = next_state;
     }
     currTime = osKernelGetTickCount();
-    while (osKernelGetTickCount() - currTime < 200) {   // just to stop the motors
+    while (osKernelGetTickCount() - currTime < 100) {
       motorStop();
+      osEventFlagsClear(flagAutoRun, 0x01);
     }
-    osEventFlagsClear(flagAutoRun, 0x01);
   }
 }
 
