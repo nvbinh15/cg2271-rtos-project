@@ -98,7 +98,7 @@ void motorStop(void) {
   TPM1_C0V = 6000;
   TPM1_C1V = 6000;
   TPM2_C0V = 6000;
-  TPM2_C0V = 6000;
+  TPM2_C1V = 6000;
 }
 
 /**
