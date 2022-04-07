@@ -19,6 +19,22 @@
 #include "autorun.h"
 #include "common.h"
 
+int running_song[] = {
+	NOTE_FS5, NOTE_FS5,NOTE_D5, NOTE_B4, REST, NOTE_B4, REST, NOTE_E5, 
+  REST, NOTE_E5, REST, NOTE_E5, NOTE_GS5, NOTE_GS5, NOTE_A5, NOTE_B5,
+  NOTE_A5, NOTE_A5, NOTE_A5, NOTE_E5, REST, NOTE_D5, REST, NOTE_FS5, 
+  REST, NOTE_FS5, REST, NOTE_FS5, NOTE_E5, NOTE_E5, NOTE_FS5, NOTE_E5,
+  NOTE_FS5, NOTE_FS5,NOTE_D5, NOTE_B4, REST, NOTE_B4, REST, NOTE_E5, 
+  
+  REST, NOTE_E5, REST, NOTE_E5, NOTE_GS5, NOTE_GS5, NOTE_A5, NOTE_B5,
+  NOTE_A5, NOTE_A5, NOTE_A5, NOTE_E5, REST, NOTE_D5, REST, NOTE_FS5, 
+  REST, NOTE_FS5, REST, NOTE_FS5, NOTE_E5, NOTE_E5, NOTE_FS5, NOTE_E5,
+  NOTE_FS5, NOTE_FS5,NOTE_D5, NOTE_B4, REST, NOTE_B4, REST, NOTE_E5, 
+  REST, NOTE_E5, REST, NOTE_E5, NOTE_GS5, NOTE_GS5, NOTE_A5, NOTE_B5,
+  
+  NOTE_A5, NOTE_A5, NOTE_A5, NOTE_E5, REST, NOTE_D5, REST, NOTE_FS5, 
+  REST, NOTE_FS5, REST, NOTE_FS5, NOTE_E5, NOTE_E5, NOTE_FS5, NOTE_E5
+};
 
 osEventFlagsId_t 
 	flagRunningSound, flagEndingSound, 
@@ -32,13 +48,14 @@ volatile uint8_t data;
 // sensor related callback (50hz)
 static void timerStart(void) {
   osTimerId_t sensorCallbackId;
-  
+   sensorCallbackId = osTimerNew(imuCallback, osTimerPeriodic, NULL, NULL);
+
   if (sensorCallbackId != NULL) {
     osStatus_t timerStatus = osTimerStart(sensorCallbackId, 20U);
     
     if (timerStatus != osOK) {
       GPIOSetOutput(PORTB, 19, LOW);
-      UARTTransmit(UART2, '!');
+      //UARTTransmit(UART2, '!');
     }
   }
 }
@@ -98,7 +115,9 @@ void tEndingSound(void *argument) {
 void app_main (void *argument) {
  
   // ...
+	osEventFlagsClear(flagRunning, 0x01);
 	osEventFlagsSet(flagRunningSound, 0x01);
+	osEventFlagsSet(flagStation, 0x01);
   for (;;) {
 		
 		
@@ -119,6 +138,7 @@ void app_main (void *argument) {
 			osEventFlagsClear(flagStation, 0x01);
 			right();
 		} else if (data == STOP) {
+			osEventFlagsClear(flagAutoRun, 0x01);
 			osEventFlagsSet(flagStation, 0x01);
 			osEventFlagsClear(flagRunning, 0x01);
 			stop();
@@ -147,8 +167,14 @@ void app_main (void *argument) {
 			osEventFlagsClear(flagRunningSound, 0x01);
 			osEventFlagsClear(flagEndingSound, 0x01);			
 		} else if (data == AUTO) {
-      		osEventFlagsSet(flagAutoRun, 0x01);
-    	}
+			osEventFlagsClear(flagEndingSound, 0x01);
+			osEventFlagsClear(flagStation, 0x01);
+			osEventFlagsSet(flagRunning, 0x01);
+			osEventFlagsSet(flagRunningSound, 0x01);
+			
+			osEventFlagsSet(flagAutoRun, 0x01);
+			data = 0;
+		}
 		
 	}
 }
@@ -178,12 +204,16 @@ int main (void) {
 	
 	flagStation = osEventFlagsNew(NULL);
 	flagRunning = osEventFlagsNew(NULL);
-  
+	
+	
  
   UARTInit(UART2, PIN_PAIR_3, 9600, true);
  
   osKernelInitialize();                 // Initialize CMSIS-RTOS
   osThreadNew(app_main, NULL, NULL);    // Create application main thread
+	 
+	osThreadNew(tTimerStart, NULL, NULL);
+	osThreadNew(tAutoRun, NULL, NULL);
 	
 	runLedCycle1Thread();
 	runLedFlash500Thread();
@@ -194,9 +224,8 @@ int main (void) {
 	osThreadNew(tEndingSound, NULL, NULL);
 
 	// auto run
-  //osThreadNew(tTimerStart, NULL, NULL);
-	//osThreadNew(tAutoRun, NULL, NULL);
 
+	osThreadNew(tDebugState, NULL, NULL);
   osKernelStart();                      // Start thread execution
   for (;;) {}
 }

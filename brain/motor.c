@@ -126,16 +126,16 @@ void backward(void) {
  * Pivot turn right with 100% Duty cycle
  */
 void right(void) {
-  leftMove(FOWARD, 100);
-  rightMove(REVERSE, 100);
+  leftMove(FOWARD, 50);
+  rightMove(REVERSE, 50);
 }
 
 /**
  * Pivot turn left with 100% Duty cycle
  */
 void left(void) {
-  leftMove(REVERSE, 100);
-  rightMove(FOWARD, 100);
+  leftMove(REVERSE, 50);
+  rightMove(FOWARD, 50);
 }
 
 /**

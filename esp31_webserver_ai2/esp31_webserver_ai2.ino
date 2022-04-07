@@ -22,6 +22,8 @@
 #define FINISH 0x51
 #define SILENT 0x52
 
+#define SENSOR 0x53
+
 
 // Replace with your network credentials
 const char* ssid = "binh";
@@ -153,6 +155,10 @@ void loop() {
 
   if(req.indexOf("silent") != -1) {
     Serial2.write(SILENT);
+  }
+
+  if(req.indexOf("sensor") != -1) {
+    Serial2.write(SENSOR);
   }
 
   client.println("HTTP/1.1 200 OK");

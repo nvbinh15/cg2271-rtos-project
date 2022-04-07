@@ -17,9 +17,6 @@ int ending_song[] = { // happy birthday
 };
 
 
-
-
-
 /* Initialize PWM module */
 void initSound(void) {
 	// Enable Clock Gating for PORTE

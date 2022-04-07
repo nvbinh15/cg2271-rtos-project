@@ -21,7 +21,7 @@ Target DLL:      CMSIS_AGDI.dll V1.32.0.0
 Dialog DLL:      TARMCM1.DLL V1.14.1.0
  
 <h2>Project:</h2>
-C:\Users\Van Binh\Desktop\cg2271-project\brain\myBrain.uvprojx
+C:\Users\Van Binh\Desktop\c\brain\myBrain.uvprojx
 Project File Date:  04/06/2022
 
 <h2>Output:</h2>
@@ -35,25 +35,31 @@ uart.c(142): warning:  #223-D: function "abs" declared implicitly
     UARTTransmit(UART, abs(num)/1000 + '0');
 uart.c: 2 warnings, 0 errors
 compiling main.c...
-common.h(52): warning:  #1-D: last line of file ends without a newline
+common.h(135): warning:  #1-D: last line of file ends without a newline
   #endif
 main.c: 1 warning, 0 errors
 compiling pwm.c...
 compiling i2c.c...
 compiling sound.c...
+common.h(135): warning:  #1-D: last line of file ends without a newline
+  #endif
+sound.c: 1 warning, 0 errors
 compiling motor.c...
 compiling sonar.c...
 compiling sensors.c...
 compiling mpu6050.c...
 compiling autorun.c...
+common.h(135): warning:  #1-D: last line of file ends without a newline
+  #endif
+autorun.c: 1 warning, 0 errors
 compiling clock.c...
-assembling startup_MKL25Z4.s...
 compiling rtx_lib.c...
+assembling startup_MKL25Z4.s...
 compiling RTX_Config.c...
 compiling system_MKL25Z4.c...
 linking...
-Program Size: Code=15496 RO-data=708 RW-data=5724 ZI-data=2428  
-".\Objects\myBrain.axf" - 0 Error(s), 3 Warning(s).
+Program Size: Code=20924 RO-data=708 RW-data=5724 ZI-data=2428  
+".\Objects\myBrain.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -88,25 +94,25 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.3.0
 
    * Component: ARM::CMSIS:RTOS2:Keil RTX5:Library:5.5.1
-      Source file:   CMSIS\RTOS2\RTX\Config\RTX_Config.c
-      Include file:  CMSIS\RTOS2\RTX\Include\rtx_os.h
-      Source file:   CMSIS\RTOS2\RTX\Template\main.c
       Include file:  CMSIS\RTOS2\RTX\Config\RTX_Config.h
-      Source file:   CMSIS\RTOS2\RTX\Template\Events.c
+      Source file:   CMSIS\RTOS2\RTX\Config\RTX_Config.c
       Source file:   CMSIS\RTOS2\RTX\Template\MemPool.c
       Source file:   CMSIS\RTOS2\RTX\Template\Mutex.c
-      Source file:   CMSIS\RTOS2\RTX\Template\MsgQueue.c
-      Library file:  CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib
       Source file:   CMSIS\RTOS2\RTX\Template\Thread.c
+      Source file:   CMSIS\RTOS2\RTX\Template\main.c
+      Source file:   CMSIS\RTOS2\RTX\Template\Events.c
       Source file:   CMSIS\RTOS2\RTX\Template\Semaphore.c
+      Source file:   CMSIS\RTOS2\RTX\Template\MsgQueue.c
       Source file:   CMSIS\RTOS2\RTX\Template\Timer.c
-      Source file:   CMSIS\RTOS2\RTX\Template\svc_user.c
+      Include file:  CMSIS\RTOS2\RTX\Include\rtx_os.h
       Source file:   CMSIS\RTOS2\RTX\Source\rtx_lib.c
+      Source file:   CMSIS\RTOS2\RTX\Template\svc_user.c
+      Library file:  CMSIS\RTOS2\RTX\Library\ARM\RTX_CM0.lib
 
    * Component: Keil::Device:Startup:2.5.0
+      Source file:   Device\Source\system_MKL25Z4.c
       Include file:  Device\Source\system_MKL25Z4.h
       Source file:   Device\Source\ARM\startup_MKL25Z4.s
-      Source file:   Device\Source\system_MKL25Z4.c
 Build Time Elapsed:  00:00:04
 </pre>
 </body>

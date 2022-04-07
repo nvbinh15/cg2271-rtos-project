@@ -90,7 +90,7 @@ void ledRun1(void* argument) {
 	//construct list of nodes
 	ledArrayNode nodeArray[10] = {node0, node1, node2, node3, node4, node5, node6, node7, node8, node9};
 		for (;;) {
-			osEventFlagsWait(flagRunning, 0x01, osFlagsWaitAny, osWaitForever);
+			osEventFlagsWait(flagRunning, 0x01, osFlagsNoClear, osWaitForever);
 			for (int x = 0; x < 10; ++x) {
 				pulse(nodeArray[x]);
 			}
@@ -126,7 +126,7 @@ void ledFlash500(void *argument) {
 	//construct list of nodes
 	ledArrayNode nodeArray[10] = {node0, node1, node2, node3, node4, node5, node6, node7, node8, node9};
 	for (;;) {
-		osEventFlagsWait(flagRunning, 0x01, osFlagsWaitAny, osWaitForever);
+		osEventFlagsWait(flagRunning, 0x01, osFlagsNoClear, osWaitForever);
 		flashLed(nodeArray, 500);
 	}
 }
@@ -145,7 +145,7 @@ void ledFlash250(void *argument) {
 	//construct list of nodes
 	ledArrayNode nodeArray[10] = {node0, node1, node2, node3, node4, node5, node6, node7, node8, node9};
 	for (;;) {
-		osEventFlagsWait(flagStation, 0x01, osFlagsWaitAny, osWaitForever);
+		osEventFlagsWait(flagStation, 0x01, osFlagsNoClear, osWaitForever);
 		flashLed(nodeArray, 250);
 	}
 }
@@ -172,7 +172,7 @@ void onALLLED(void *argument) {
 
 	//leave output on
 	for (;;) {
-		osEventFlagsWait(flagStation, 0x01, osFlagsWaitAny, osWaitForever);
+		osEventFlagsWait(flagStation, 0x01, osFlagsNoClear, osWaitForever);
 		onLED(nodeArray);
 		osDelay(2000);
 	}
@@ -231,36 +231,6 @@ void turnOnLeds(void) {
 	}
 }
 
-void cycleOnce() {
-	for(int i = 0; i < 10; ++i) {
-		GPIOSetOutput(frontLeds[i].PORT, frontLeds[i].pinNo, HIGH);
-		osDelay(50);
-		GPIOSetOutput(frontLeds[i].PORT, frontLeds[i].pinNo, LOW);
-	}
-	for(int i = 9; i > -1; --i) {
-		GPIOSetOutput(frontLeds[i].PORT, frontLeds[i].pinNo, HIGH);
-		osDelay(50);
-		GPIOSetOutput(frontLeds[i].PORT, frontLeds[i].pinNo, LOW);
-	}
-}
-
-void controlLedOnMovement(void* argument) {
-	for(;;) {
-	osEventFlagsWait(flagRunning, 0x01, osFlagsWaitAny, osWaitForever);
-	cycleOnce();
-	flashLed(backLeds, 500);
-	}
-}
-
-
-void controlLedOnStationary(void* argument) {
-	for(;;) {
-	osEventFlagsWait(flagStation, 0x01, osFlagsWaitAny, osWaitForever);
-	turnOnLeds();
-	flashLed(backLeds, 250);
-	}
-
-}
  
 /**
  * Thread creation
