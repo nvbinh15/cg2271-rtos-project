@@ -51,7 +51,7 @@ void tAutoRun(void *argument) {
         
         currTime = osKernelGetTickCount();
         
-        while (osKernelGetTickCount() - currTime < 150) {
+        while (osKernelGetTickCount() - currTime < 300) {
           motorStop();
         }
         osTimerStop(sonarCallbackId);
@@ -79,6 +79,11 @@ void tAutoRun(void *argument) {
               leftMove(FOWARD, 95 - gyro_yaw_input);
               rightMove(FOWARD, 95 + gyro_yaw_input);
             }
+						
+						currTime = osKernelGetTickCount();
+						while (osKernelGetTickCount() - currTime < 150) {
+							motorStop();
+						}
             
             next_turning_state = TURN_SECOND;     
           }
@@ -100,6 +105,11 @@ void tAutoRun(void *argument) {
               rightMove(FOWARD, 95 + gyro_yaw_input);
             }
             
+						currTime = osKernelGetTickCount();
+						while (osKernelGetTickCount() - currTime < 150) {
+							motorStop();
+						}
+						
             next_turning_state = TURN_THIRD;
           }
           
@@ -120,6 +130,11 @@ void tAutoRun(void *argument) {
               rightMove(FOWARD, 95 + gyro_yaw_input);
             }
             
+						currTime = osKernelGetTickCount();
+						while (osKernelGetTickCount() - currTime < 150) {
+							motorStop();
+						}
+						
             next_turning_state = TURN_FOURTH;
           }
           
@@ -139,6 +154,11 @@ void tAutoRun(void *argument) {
               leftMove(FOWARD, 95 - gyro_yaw_input);
               rightMove(FOWARD, 95 + gyro_yaw_input);
             }
+						
+						currTime = osKernelGetTickCount();
+						while (osKernelGetTickCount() - currTime < 150) {
+							motorStop();
+						}
             
             next_turning_state = TURN_FIFTH;
           }
@@ -178,6 +198,7 @@ void tAutoRun(void *argument) {
 
       osEventFlagsClear(flagAutoRun, 0x01);
 			osEventFlagsClear(flagRunning, 0x01);
+			osEventFlagsClear(flagRunningSound, 0x01);
 			osEventFlagsSet(flagStation, 0x01);
 			osEventFlagsSet(flagEndingSound, 0x01);
 		

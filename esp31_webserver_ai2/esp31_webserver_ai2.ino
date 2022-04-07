@@ -22,7 +22,7 @@
 #define FINISH 0x51
 #define SILENT 0x52
 
-#define SENSOR 0x53
+#define RUNNING_SOUND 0x53
 
 
 // Replace with your network credentials
@@ -157,8 +157,8 @@ void loop() {
     Serial2.write(SILENT);
   }
 
-  if(req.indexOf("sensor") != -1) {
-    Serial2.write(SENSOR);
+  if(req.indexOf("runningSound") != -1) {
+    Serial2.write(RUNNING_SOUND);
   }
 
   client.println("HTTP/1.1 200 OK");

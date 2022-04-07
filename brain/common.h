@@ -26,7 +26,7 @@
 #define FINISH 0x51
 #define SILENT 0x52
 
-#define SENSOR 0x53
+#define RUNNING_SOUND 0x53
 
 
 #define NOTE_B0  31

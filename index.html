@@ -160,8 +160,8 @@
         <button class="button button_auto" onclick="silent()">
             Silent
         </button> 
-        <button class="button button_auto" onclick="sensor()">
-            Sensor
+        <button class="button button_auto" onclick="running_sound()">
+            Running Sound
         </button> 
     </div>
 
@@ -251,8 +251,8 @@
         fetch('http://' + ipAddress + '/silent')    
     }
 
-    function sensor() {
-        fetch('http://' + ipAddress + '/sensor')    
+    function running_sound() {
+        fetch('http://' + ipAddress + '/runningSound')    
     }
 
     let l, r, u, d;

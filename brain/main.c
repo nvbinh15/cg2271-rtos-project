@@ -174,6 +174,9 @@ void app_main (void *argument) {
 			
 			osEventFlagsSet(flagAutoRun, 0x01);
 			data = 0;
+		} else if (data == RUNNING_SOUND) {
+			osEventFlagsClear(flagEndingSound, 0x01);
+			osEventFlagsSet(flagRunningSound, 0x01);
 		}
 		
 	}
