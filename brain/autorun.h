@@ -11,7 +11,7 @@
 #define DIST_CLOSE_ENOUGH  0.5f
 //#define MOVE_TIME          800  // for hexagon
 //#define STOP_DISTANCE       30  // for hexagon
-#define MOVE_TIME            580
+#define MOVE_TIME            690
 #define STOP_DISTANCE        35
 #define TURN_SPEED_BASE      27
 

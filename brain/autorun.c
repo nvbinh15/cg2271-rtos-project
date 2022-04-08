@@ -43,8 +43,8 @@ void tAutoRun(void *argument) {
       if (curr_state == START) {
         currTime = osKernelGetTickCount();
         while (sonarDistance > STOP_DISTANCE) {
-          leftMove(FOWARD, 95 - gyro_yaw_input);
-          rightMove(FOWARD, 95 + gyro_yaw_input);
+          leftMove(FOWARD, 80 - gyro_yaw_input);
+          rightMove(FOWARD, 80 + gyro_yaw_input);
         }
         
         endTime = osKernelGetTickCount() - currTime + 100;    // for ending exit
@@ -76,12 +76,12 @@ void tAutoRun(void *argument) {
             // move straight for a few moment
             currTime = osKernelGetTickCount();
             while (osKernelGetTickCount() - currTime < MOVE_TIME) {
-              leftMove(FOWARD, 95 - gyro_yaw_input);
-              rightMove(FOWARD, 95 + gyro_yaw_input);
+              leftMove(FOWARD, 80 - gyro_yaw_input);
+              rightMove(FOWARD, 80 + gyro_yaw_input);
             }
 						
 						currTime = osKernelGetTickCount();
-						while (osKernelGetTickCount() - currTime < 150) {
+						while (osKernelGetTickCount() - currTime < 200) {
 							motorStop();
 						}
             
@@ -101,12 +101,12 @@ void tAutoRun(void *argument) {
             // move straight for a few moment
             currTime = osKernelGetTickCount();
             while (osKernelGetTickCount() - currTime < MOVE_TIME) {
-              leftMove(FOWARD, 95 - gyro_yaw_input);
-              rightMove(FOWARD, 95 + gyro_yaw_input);
+              leftMove(FOWARD, 80 - gyro_yaw_input);
+              rightMove(FOWARD, 80 + gyro_yaw_input);
             }
             
 						currTime = osKernelGetTickCount();
-						while (osKernelGetTickCount() - currTime < 150) {
+						while (osKernelGetTickCount() - currTime < 200) {
 							motorStop();
 						}
 						
@@ -117,8 +117,8 @@ void tAutoRun(void *argument) {
           else if (turning_curr_state == TURN_THIRD) {
             //target_heading = angle_yaw + 60;
             angle_yaw = 0;
-            while (fabs(angle_yaw) < 90) {
-              float correction = fabs(angle_yaw - 90) * 0.2;
+            while (fabs(angle_yaw) < 65) {
+              float correction = fabs(angle_yaw - 65) * 0.2;
               leftMove(FOWARD, TURN_SPEED_BASE + correction);
               rightMove(REVERSE, TURN_SPEED_BASE + correction);
             }
@@ -126,12 +126,12 @@ void tAutoRun(void *argument) {
             // move straight for a few moment
             currTime = osKernelGetTickCount();
             while (osKernelGetTickCount() - currTime < MOVE_TIME) {
-              leftMove(FOWARD, 95 - gyro_yaw_input);
-              rightMove(FOWARD, 95 + gyro_yaw_input);
+              leftMove(FOWARD, 80 - gyro_yaw_input);
+              rightMove(FOWARD, 80 + gyro_yaw_input);
             }
             
 						currTime = osKernelGetTickCount();
-						while (osKernelGetTickCount() - currTime < 150) {
+						while (osKernelGetTickCount() - currTime < 200) {
 							motorStop();
 						}
 						
@@ -142,8 +142,8 @@ void tAutoRun(void *argument) {
           else if (turning_curr_state == TURN_FOURTH) {
             //target_heading = angle_yaw + 60;
             angle_yaw = 0;
-            while (fabs(angle_yaw) < 90) {
-              float correction = fabs(angle_yaw - 90) * 0.2;
+            while (fabs(angle_yaw) < 80) {
+              float correction = fabs(angle_yaw - 80) * 0.2;
               leftMove(FOWARD, TURN_SPEED_BASE + correction);
               rightMove(REVERSE, TURN_SPEED_BASE + correction);
             }
@@ -151,12 +151,12 @@ void tAutoRun(void *argument) {
             // move straight for a few moment
             currTime = osKernelGetTickCount();
             while (osKernelGetTickCount() - currTime < MOVE_TIME) {
-              leftMove(FOWARD, 95 - gyro_yaw_input);
-              rightMove(FOWARD, 95 + gyro_yaw_input);
+              leftMove(FOWARD, 80 - gyro_yaw_input);
+              rightMove(FOWARD, 80 + gyro_yaw_input);
             }
 						
 						currTime = osKernelGetTickCount();
-						while (osKernelGetTickCount() - currTime < 150) {
+						while (osKernelGetTickCount() - currTime < 200) {
 							motorStop();
 						}
             
@@ -167,8 +167,8 @@ void tAutoRun(void *argument) {
           else if (turning_curr_state == TURN_FIFTH) {
             //target_heading = angle_yaw + 60;
             angle_yaw = 0;
-            while (fabs(angle_yaw) < 60) {
-              float correction = fabs(-60 - angle_yaw) * 0.2;
+            while (fabs(angle_yaw) < 50) {
+              float correction = fabs(-50 - angle_yaw) * 0.2;
               leftMove(REVERSE, TURN_SPEED_BASE + correction);
               rightMove(FOWARD, TURN_SPEED_BASE + correction);
             }
@@ -184,8 +184,8 @@ void tAutoRun(void *argument) {
       else if (curr_state == END) {
         currTime = osKernelGetTickCount();
         while (osKernelGetTickCount() - currTime < endTime) {
-          leftMove(FOWARD, 95 - gyro_yaw_input);
-          rightMove(FOWARD, 95 + gyro_yaw_input);
+          leftMove(FOWARD, 80 - gyro_yaw_input);
+          rightMove(FOWARD, 80 + gyro_yaw_input);
         }
         next_state = STOPA;
       }

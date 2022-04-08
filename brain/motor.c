@@ -110,7 +110,7 @@ void motorStop(void) {
  * Move forward with 100% Duty cycle
  */ 
 void forward(void) {
-  leftMove(FOWARD, 100);
+  leftMove(FOWARD, 90);
   rightMove(FOWARD, 100);
 }
 
@@ -118,7 +118,7 @@ void forward(void) {
  * Move backward with 100% Duty cycle
  */
 void backward(void) {
-  leftMove(REVERSE, 100);
+  leftMove(REVERSE, 90);
   rightMove(REVERSE, 100);
 }
 
