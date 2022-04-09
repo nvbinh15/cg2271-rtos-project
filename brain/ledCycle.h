@@ -12,6 +12,7 @@
 	*  runLedFlash200Thread(); --> flash at rate 250 (typing error but it's 250)
 	*   turnOnLed();           --> turn on all leds, added small delay to return control back and reduce cycles
 	*/
+
 /**
  * MEMORY ALLOCATION
  */
@@ -234,6 +235,7 @@ void turnOnLeds(void) {
  
 /**
  * Thread creation
+ * @author DN
  */
  /////////////////////////////////////////////////////
 osThreadId_t runLedCycle1Thread(void) {
