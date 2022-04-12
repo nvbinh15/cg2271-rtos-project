@@ -102,11 +102,6 @@ void motorStop(void) {
 }
 
 /**
- * BELOW FUNCTIONS NEWLY ADDED
- * Remember to remove identical ones in GPIO
- */
-
-/**
  * Move forward with 100% Duty cycle
  */ 
 void forward(void) {

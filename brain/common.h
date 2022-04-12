@@ -120,16 +120,10 @@
 #define NOTE_DS8 4978
 #define REST      0
 
-
-
 extern osEventFlagsId_t 
 	flagRunningSound, flagEndingSound, 
 	flagFinish,
 	flagRunning, flagStation
 ;
-
-
-
-
 
 #endif

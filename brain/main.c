@@ -20,7 +20,7 @@
 #include "common.h"
 
 int running_song[] = {
-	NOTE_FS5, NOTE_FS5,NOTE_D5, NOTE_B4, REST, NOTE_B4, REST, NOTE_E5, 
+  NOTE_FS5, NOTE_FS5,NOTE_D5, NOTE_B4, REST, NOTE_B4, REST, NOTE_E5, 
   REST, NOTE_E5, REST, NOTE_E5, NOTE_GS5, NOTE_GS5, NOTE_A5, NOTE_B5,
   NOTE_A5, NOTE_A5, NOTE_A5, NOTE_E5, REST, NOTE_D5, REST, NOTE_FS5, 
   REST, NOTE_FS5, REST, NOTE_FS5, NOTE_E5, NOTE_E5, NOTE_FS5, NOTE_E5,
@@ -55,7 +55,6 @@ static void timerStart(void) {
     
     if (timerStatus != osOK) {
       GPIOSetOutput(PORTB, 19, LOW);
-      //UARTTransmit(UART2, '!');
     }
   }
 }
@@ -77,6 +76,7 @@ void delay(unsigned long delay) {
   }
 }
 
+/* IRQ Handler for UART */
 void UART2_IRQHandler(void) {
   NVIC_ClearPendingIRQ(UART2_IRQn);
 	
@@ -85,6 +85,7 @@ void UART2_IRQHandler(void) {
   }
 }
 
+/* Play running sound thread */
 void tRunningSound(void *argument) {
 	
 	for (;;) {
@@ -100,6 +101,7 @@ void tRunningSound(void *argument) {
 	}
 }
 
+/* Play ending sound thread */
 void tEndingSound(void *argument) {
 	
 	for (;;) {
@@ -114,10 +116,10 @@ void tEndingSound(void *argument) {
  *---------------------------------------------------------------------------*/
 void app_main (void *argument) {
  
-  // ...
 	osEventFlagsClear(flagRunning, 0x01);
 	osEventFlagsSet(flagRunningSound, 0x01);
 	osEventFlagsSet(flagStation, 0x01);
+
   for (;;) {
 		
 		
@@ -161,7 +163,6 @@ void app_main (void *argument) {
 		} else if (data == FINISH) {
 			osEventFlagsClear(flagRunningSound, 0x01);
 			osEventFlagsSet(flagEndingSound, 0x01);
-
 		} else if (data == SILENT) {
 			stop_sound();
 			osEventFlagsClear(flagRunningSound, 0x01);
@@ -170,8 +171,7 @@ void app_main (void *argument) {
 			osEventFlagsClear(flagEndingSound, 0x01);
 			osEventFlagsClear(flagStation, 0x01);
 			osEventFlagsSet(flagRunning, 0x01);
-			osEventFlagsSet(flagRunningSound, 0x01);
-			
+			osEventFlagsSet(flagRunningSound, 0x01);			
 			osEventFlagsSet(flagAutoRun, 0x01);
 			data = 0;
 		} else if (data == RUNNING_SOUND) {
@@ -218,6 +218,7 @@ int main (void) {
 	osThreadNew(tTimerStart, NULL, NULL);
 	osThreadNew(tAutoRun, NULL, NULL);
 	
+	// Initialize LED threads
 	runLedCycle1Thread();
 	runLedFlash500Thread();
 	turnOnLed();
@@ -227,7 +228,6 @@ int main (void) {
 	osThreadNew(tEndingSound, NULL, NULL);
 
 	// auto run
-
 	osThreadNew(tDebugState, NULL, NULL);
   osKernelStart();                      // Start thread execution
   for (;;) {}

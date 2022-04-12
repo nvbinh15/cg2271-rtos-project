@@ -28,11 +28,6 @@ void initSonar(void) {
   GPIOA->PDDR &= ~MASK(ECHO_PIN);
   
   GPIOSetOutput(PORTA, TRIGGER_PIN, LOW);
-  
-  //NVIC_SetPriority(PORTA_IRQn, 2);
-  //NVIC_ClearPendingIRQ(PORTA_IRQn);
-  //isInt = false;
-  //NVIC_EnableIRQ(PORTA_IRQn);
 }
 
 
@@ -43,5 +38,4 @@ void PORTA_IRQHandler(void) {
   
   NVIC_ClearPendingIRQ(PORTA_IRQn);
   PORTA->ISFR |= MASK(ECHO_PIN);
-  //NVIC_DisableIRQ(PORTA_IRQn);
 }

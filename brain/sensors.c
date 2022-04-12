@@ -10,8 +10,6 @@
 #include  CMSIS_device_header
 #include "cmsis_os2.h"
 
-
-
 int cal_int = 0;
 int gyro_x_cal, gyro_y_cal, gyro_z_cal;
 
@@ -46,7 +44,6 @@ void calibrateMPU6050(void) {
 void initYawAngle(void) {
   angle_yaw = 0;
 }
-
 
 void readSonar(void) {
   GPIOSetOutput(PORTA, TRIGGER_PIN, HIGH);
@@ -83,8 +80,6 @@ void tSonar(void *argument) {
     PORTA->ISFR |= MASK(ECHO_PIN);
   }
 }
-
-
 
 void imuCallback(void *argument) {
   readMPU6050();
