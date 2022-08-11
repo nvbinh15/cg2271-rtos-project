@@ -2,6 +2,8 @@
 
 The project involved assembling and programming a robot based on Real-Time Operating System concepts taught throughout the semester and complete 2 different challenge runs
 
+[Project Video](https://youtu.be/h3exgyn96FM)
+
 ## Main components
 
 * **FRDM-KL25Z** (Brain)
